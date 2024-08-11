@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="xkOfKR" name="DjApp" projectType="guiapp" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
+  <MAINGROUP id="GiSF0A" name="DjApp">
+    <GROUP id="{494D4DEC-023E-0934-403F-57624A51829F}" name="Resources">
+      <FILE id="QRAe2o" name="close-line-icon.svg" compile="0" resource="1"
+            file="../../../CM2030-GP/final/resources/close-line-icon.svg"/>
+    </GROUP>
+    <GROUP id="{2746E5B9-4089-FA41-026D-5912DA22AA5F}" name="Source">
+      <FILE id="IgvlmC" name="SearchComponent.cpp" compile="1" resource="0"
+            file="Source/SearchComponent.cpp"/>
+      <FILE id="P6FLlt" name="SearchComponent.h" compile="0" resource="0"
+            file="Source/SearchComponent.h"/>
+      <FILE id="sgFFEv" name="MidSection.cpp" compile="1" resource="0" file="Source/MidSection.cpp"/>
+      <FILE id="GJF2PM" name="MidSection.h" compile="0" resource="0" file="Source/MidSection.h"/>
+      <FILE id="om3bcp" name="PlaylistComponent.cpp" compile="1" resource="0"
+            file="Source/PlaylistComponent.cpp"/>
+      <FILE id="G7tbX1" name="PlaylistComponent.h" compile="0" resource="0"
+            file="Source/PlaylistComponent.h"/>
+      <FILE id="Q7P8TC" name="WaveformDisplay.cpp" compile="1" resource="0"
+            file="Source/WaveformDisplay.cpp"/>
+      <FILE id="OqYjfZ" name="WaveformDisplay.h" compile="0" resource="0"
+            file="Source/WaveformDisplay.h"/>
+      <FILE id="RfBedV" name="DeckGUI.cpp" compile="1" resource="0" file="Source/DeckGUI.cpp"/>
+      <FILE id="E9keBJ" name="DeckGUI.h" compile="0" resource="0" file="Source/DeckGUI.h"/>
+      <FILE id="E1H6MH" name="DJAudioPlayer.cpp" compile="1" resource="0"
+            file="Source/DJAudioPlayer.cpp"/>
+      <FILE id="QxKjuw" name="DJAudioPlayer.h" compile="0" resource="0" file="Source/DJAudioPlayer.h"/>
+      <FILE id="yksVcJ" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="AEHmei" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="tnptFN" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="NewProject"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="NewProject"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../JUCE 5/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+</JUCERPROJECT>

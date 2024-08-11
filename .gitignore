@@ -1,0 +1,16 @@
+# Ignore node_modules directory
+JUCEProjects/
+Projucer/
+juce-8.0.0-windows/
+JUCE/
+Resources/
+Builds/
+
+# Ignore zip and csv files
+*.zip
+*.csv
+*.pdf
+
+# Ignore IDE-specific directories
+.vs/
+.idea/
