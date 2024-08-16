@@ -29,31 +29,47 @@ void SearchComponent::paint (juce::Graphics& g)
         auto bounds = getLocalBounds().toFloat().reduced(10);
         auto radius = juce::jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
 
-        // Draw outer circle (the disc)
-        g.setColour(juce::Colours::grey);
+        // Draw outer circle (the disc)        
+        juce::ColourGradient gradient1(juce::Colour::fromRGB(0x05, 0x05, 0x05), 0, 0,
+        juce::Colour::fromRGB(0xa3, 0xa3, 0xa3), bounds.getWidth(), bounds.getHeight(),false);
+        g.setGradientFill(gradient1);
         g.fillEllipse(bounds);
+      
+        juce::ColourGradient gradient2(juce::Colour::fromRGB(0x53, 0x53, 0x53), 0, 0,
+        juce::Colour::fromRGB(0x05, 0x05, 0x05), bounds.getWidth(), bounds.getHeight(), false);
+        g.setGradientFill(gradient2);
+        g.fillEllipse(bounds.reduced(radius * 0.05f));
 
-        // Draw inner circle (label area)
-        g.setColour(juce::Colours::darkgrey);
-        g.fillEllipse(bounds.reduced(radius * 0.4f));
+        g.setColour(juce::Colours::white);
+        g.fillEllipse(bounds.reduced(radius * 0.15f));
 
-        // Draw very center circle (spindle hole)
         g.setColour(juce::Colours::black);
-        g.fillEllipse(bounds.reduced(radius * 0.8f));
+        g.fillEllipse(bounds.reduced(radius * 0.18f));
 
-        // Optionally draw some radial lines to simulate disc grooves
-        g.setColour(juce::Colours::lightgrey.withAlpha(0.5f));
-        for (int i = 0; i < 12; ++i)
+        g.setColour(juce::Colours::black);
+        g.fillEllipse(bounds.reduced(radius * 0.2f));
+
+        g.setColour(juce::Colours::lightgrey);
+        for (int i = 0; i < 100; ++i)
         {
-            auto angle = juce::MathConstants<float>::twoPi * i / 12.0f;
-            auto lineLength = radius * 0.6f;
+            auto angle = juce::MathConstants<float>::twoPi * i / 100.0f;
+            auto lineLength = radius * 0.4f;
             juce::Line<float> grooveLine(bounds.getCentre().translated(
                 std::cos(angle) * lineLength,
                 std::sin(angle) * lineLength),
                 bounds.getCentre());
 
-            g.drawLine(grooveLine, 2.0f);
+            g.drawLine(grooveLine, 1.0f);
         }
+
+        g.setColour(juce::Colours::black);
+        g.fillEllipse(bounds.reduced(radius * 0.7f));
+
+        g.setColour(juce::Colours::lightgrey);
+        g.fillEllipse(bounds.reduced(radius * 0.9f));
+
+        g.setColour(juce::Colours::black);
+        g.fillEllipse(bounds.reduced(radius * 0.98f));
 }
 
 void SearchComponent::resized()
@@ -62,14 +78,6 @@ void SearchComponent::resized()
     // components that your component contains..
 
 }
-
-/*
-* 
-	if (slider == &positionSlider)
-	{
-		player->setPositionRelative(slider->getValue());
-	}
-*/
 
 void SearchComponent::mouseDown(const juce::MouseEvent& event)
 {
@@ -88,11 +96,7 @@ void SearchComponent::mouseDrag(const juce::MouseEvent& event)
 
     lastAngle = currentAngle;
 
-    // Apply the angle change
-    //if (onRotation)
-        DBG("Angle change: " << angleChange);
-        player->setPositionChange(angleChange);
-        //onRotation(angleChange);
+        player->setPositionChange(angleChange*0.01);
 }
 
 float SearchComponent::getAngleForPoint(juce::Point<float> point)

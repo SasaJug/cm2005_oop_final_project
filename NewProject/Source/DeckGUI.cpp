@@ -16,12 +16,17 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player,
 	: player(_player), playlistComponent(_player), searchComponent(_player)
 	{
 
+	position = 0.0;
+	isPlaying = false;
+	startTimer(200);
+
+
 	playButton.addListener(this);
 	speedSlider.addListener(this);
 
 	speedSlider.setSliderStyle(juce::Slider::LinearVertical);
 	speedSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
-	speedSlider.setRange(1.0, 10.0);
+	speedSlider.setRange(0.0, 2.0);
 	speedSlider.setValue(1.0);
 
 	addAndMakeVisible(playButton);
@@ -44,7 +49,7 @@ void DeckGUI::paint(juce::Graphics& g)
 	   drawing code..
 	*/
 
-	g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));   // clear the background
+	//g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));   // clear the background
 }
 
 void DeckGUI::resized()
@@ -66,22 +71,43 @@ void DeckGUI::loadURL(URL audioURL) {
 	player->loadURL(audioURL);
 }
 
+void DeckGUI::setPositíonRelative(double pos)
+{
+	if (pos != position)
+	{
+
+		position = pos;
+		if (position >= 1.0) {
+			isPlaying = false;
+			playButton.setButtonText("PLAY");
+			player->stop();
+			player->setPositionRelative(0.0);
+			repaint();
+		}
+	}
+}
+
 void DeckGUI::buttonClicked(juce::Button* button)
 {
 	if (button == &playButton)
 	{
-		if(isPlaying)
-		{
-			playButton.setButtonText("PLAY");
-			player->stop();
-			isPlaying = false;
-		}
-		else
-		{
-			playButton.setButtonText("PAUSE");
-			player->start();
-			isPlaying = true;
-		}
+		handlePlayButton();
+	}
+}
+
+void DeckGUI::handlePlayButton()
+{
+	if (isPlaying)
+	{
+		playButton.setButtonText("PLAY");
+		player->stop();
+		isPlaying = false;
+	}
+	else
+	{
+		playButton.setButtonText("PAUSE");
+		player->start();
+		isPlaying = true;
 	}
 }
 
@@ -91,7 +117,13 @@ void DeckGUI::sliderValueChanged(juce::Slider* slider)
 	if (slider == &speedSlider)
 	{
 		player->setSpeed(slider->getValue());
-	}
+	}	
+}
+
+void DeckGUI::timerCallback()
+{
+	if(isPlaying)
+		setPositíonRelative(player->getPositionRelative());
 }
 
 

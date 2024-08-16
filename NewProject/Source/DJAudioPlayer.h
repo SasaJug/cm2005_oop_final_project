@@ -25,6 +25,7 @@ class DJAudioPlayer : public AudioSource
 		void releaseResources() override;
 
 		void loadURL(URL audioURL);
+		void unload();
 		void setGain(double gain);
 		void setSpeed(double speed);
 		void setPosition(double posInSecs);

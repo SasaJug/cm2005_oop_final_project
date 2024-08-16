@@ -23,7 +23,8 @@ using namespace juce;
 */
 class DeckGUI  : public juce::Component,
                  public juce::Button::Listener,
-                 public juce::Slider::Listener
+                 public juce::Slider::Listener,
+                 public Timer
 {
 public:
     DeckGUI(DJAudioPlayer* player,
@@ -35,10 +36,12 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
-
     void buttonClicked(juce::Button* button) override;
+    void handlePlayButton();
 
     void sliderValueChanged(juce::Slider* slider) override;
+
+    void timerCallback() override;
 
 private:
 
@@ -51,7 +54,10 @@ private:
     PlaylistComponent playlistComponent { player };
     SearchComponent searchComponent;
 
+    double position;
+
     void loadURL(URL audioURL);
+    void setPositíonRelative(double pos);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };

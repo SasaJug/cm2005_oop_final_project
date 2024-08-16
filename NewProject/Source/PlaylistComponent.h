@@ -48,6 +48,7 @@ public:
 
     void selectedRowsChanged(int lastRowSelected) override;
 
+
     void cellClicked(int rowNumber, int columnId, const MouseEvent&) override;
 
     void buttonClicked(Button* button) override;

@@ -46,6 +46,13 @@ void DJAudioPlayer::loadURL(URL audioURL) {
         DBG("Failed to create audio reader for the input stream.");
     }
 }
+
+void DJAudioPlayer::unload()
+{
+    transportSource.stop();
+    transportSource.setSource(nullptr);
+}
+
 void DJAudioPlayer::setGain(double gain) 
 {
     if(gain < 0.0 || gain > 1.0) return;
@@ -55,7 +62,7 @@ void DJAudioPlayer::setGain(double gain)
 
 void DJAudioPlayer::setSpeed(double speed)
 {
-    if(speed < 1.0 || speed > 10.0) return;
+    if(speed < 0.0 || speed > 2.0) return;
     resampleSource.setResamplingRatio(speed);
 }
 
@@ -72,6 +79,7 @@ double DJAudioPlayer::getPositionRelative()
 
 void DJAudioPlayer::setPositionRelative(double pos)
 {
+    DBG("New position relative: " << pos);
 	if(pos < 0.0 || pos > 1.0) return;
     double posInSec = transportSource.getLengthInSeconds() * pos;
 	setPosition(posInSec);
@@ -79,7 +87,9 @@ void DJAudioPlayer::setPositionRelative(double pos)
 
 void DJAudioPlayer::setPositionChange(double change)
 {
+    DBG("Angle change: " << change);
     double newPos = getPositionRelative() + change;
+    if(newPos < 0.0 || newPos > 1.0) return;
     double posInSec = transportSource.getLengthInSeconds() * newPos;
     DBG("New position: " << newPos);
     DBG("New position in seconds: " << posInSec);

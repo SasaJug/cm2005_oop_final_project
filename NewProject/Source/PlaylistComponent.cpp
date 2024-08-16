@@ -89,8 +89,11 @@ void PlaylistComponent::paintCell(Graphics& g,
 
 void PlaylistComponent::selectedRowsChanged(int lastRowSelected)
 {
-	    tableComponent.selectRow(lastRowSelected);
+    if(lastRowSelected >= 0) {
+        tableComponent.selectRow(lastRowSelected);
         player->loadURL(URL{ trackTitles[lastRowSelected] });
+    }
+
 }
 
 void PlaylistComponent::cellClicked(int rowNumber, int columnId, const MouseEvent&)
@@ -142,6 +145,11 @@ void PlaylistComponent::buttonClicked(Button* button)
     {
         int id = std::stoi(button->getComponentID().toStdString());
         DBG("PlaylistComponent::buttonClicked " << trackTitles[id].getFileName() << "");
+        if(id == tableComponent.getSelectedRow())
+		{
+			player->unload();
+            tableComponent.deselectAllRows();
+		}
         trackTitles.erase(trackTitles.begin() + id);
         tableComponent.updateContent();
     }

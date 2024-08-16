@@ -56,7 +56,7 @@ void MidSection::paint (juce::Graphics& g)
        drawing code..
     */
 
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 }
 
 void MidSection::resized()
