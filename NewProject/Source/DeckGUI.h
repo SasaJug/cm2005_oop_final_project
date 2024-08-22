@@ -15,6 +15,9 @@
 #include "DJAudioPlayer.h"
 #include "PlaylistComponent.h"
 #include "SearchComponent.h"
+#include "CustomSliderLookAndFeel.h"
+#include "PlayPauseButton.h"
+#include "CueButton.h"
 
 using namespace juce;
 
@@ -45,7 +48,6 @@ public:
 
 private:
 
-    juce::TextButton playButton{ "PLAY" };
     bool isPlaying = false;
     juce::Slider speedSlider;
 
@@ -53,11 +55,15 @@ private:
 
     PlaylistComponent playlistComponent { player };
     SearchComponent searchComponent;
+    CustomSliderLookAndFeel customSliderLookAndFeel;
+    PlayPauseButton playPauseButton;
+    CueButton cueButton;
 
     double position;
 
     void loadURL(URL audioURL);
     void setPositíonRelative(double pos);
 
+   
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };

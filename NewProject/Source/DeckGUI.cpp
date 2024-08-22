@@ -9,6 +9,7 @@
 */
 #include "DeckGUI.h"
 
+
 //==============================================================================
 DeckGUI::DeckGUI(DJAudioPlayer* _player,
 	AudioFormatManager& formatManagerToUse,
@@ -21,23 +22,28 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player,
 	startTimer(200);
 
 
-	playButton.addListener(this);
+	playPauseButton.addListener(this);
+	cueButton.addListener(this);
 	speedSlider.addListener(this);
 
 	speedSlider.setSliderStyle(juce::Slider::LinearVertical);
 	speedSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
 	speedSlider.setRange(0.0, 2.0);
 	speedSlider.setValue(1.0);
+	speedSlider.setLookAndFeel(&customSliderLookAndFeel);
 
-	addAndMakeVisible(playButton);
+	addAndMakeVisible(playPauseButton);
 	addAndMakeVisible(speedSlider);
 	addAndMakeVisible(playlistComponent);
 	addAndMakeVisible(searchComponent);
+	addAndMakeVisible(playPauseButton);
+	addAndMakeVisible(cueButton);
 }
 
 
 DeckGUI::~DeckGUI()
 {
+	speedSlider.setLookAndFeel(nullptr);
 }
 
 void DeckGUI::paint(juce::Graphics& g)
@@ -61,8 +67,9 @@ void DeckGUI::resized()
 	double columnW = getWidth()/11;
 
 	searchComponent.setBounds(columnW, 10, columnW * 9, columnW * 9);
-	speedSlider.setBounds(getWidth()*0.9, rowH*4, getWidth()*0.1, rowH*3.8);
-	playButton.setBounds(0, rowH*6.8, rowH, rowH);
+	speedSlider.setBounds(getWidth()*0.85, rowH*5, getWidth()*0.13, rowH*2.8);
+	cueButton.setBounds(10, rowH*5.7, rowH, rowH);
+	playPauseButton.setBounds(10, rowH * 6.8, rowH, rowH);
 	playlistComponent.setBounds(0, rowH * 8, getWidth(), rowH * 3);
 
 }
@@ -75,11 +82,10 @@ void DeckGUI::setPositíonRelative(double pos)
 {
 	if (pos != position)
 	{
-
 		position = pos;
 		if (position >= 1.0) {
 			isPlaying = false;
-			playButton.setButtonText("PLAY");
+			//playPauseButton.setButtonText("PLAY");
 			player->stop();
 			player->setPositionRelative(0.0);
 			repaint();
@@ -89,7 +95,7 @@ void DeckGUI::setPositíonRelative(double pos)
 
 void DeckGUI::buttonClicked(juce::Button* button)
 {
-	if (button == &playButton)
+	if (button == &playPauseButton)
 	{
 		handlePlayButton();
 	}
@@ -99,13 +105,13 @@ void DeckGUI::handlePlayButton()
 {
 	if (isPlaying)
 	{
-		playButton.setButtonText("PLAY");
+		//playButton.setButtonText("PLAY");
 		player->stop();
 		isPlaying = false;
 	}
 	else
 	{
-		playButton.setButtonText("PAUSE");
+		//playButton.setButtonText("PAUSE");
 		player->start();
 		isPlaying = true;
 	}

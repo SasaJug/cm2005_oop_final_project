@@ -8,6 +8,20 @@
             file="../../../CM2030-GP/final/resources/close-line-icon.svg"/>
     </GROUP>
     <GROUP id="{2746E5B9-4089-FA41-026D-5912DA22AA5F}" name="Source">
+      <FILE id="pVIxIP" name="CueButton.cpp" compile="1" resource="0" file="Source/CueButton.cpp"/>
+      <FILE id="ioAmKE" name="CueButton.h" compile="0" resource="0" file="Source/CueButton.h"/>
+      <FILE id="gtW17w" name="PlayPauseButton.cpp" compile="1" resource="0"
+            file="Source/PlayPauseButton.cpp"/>
+      <FILE id="pCqfcl" name="PlayPauseButton.h" compile="0" resource="0"
+            file="Source/PlayPauseButton.h"/>
+      <FILE id="OMdGpo" name="RoundButtonBase.cpp" compile="1" resource="0"
+            file="Source/RoundButtonBase.cpp"/>
+      <FILE id="RUMz8v" name="RoundButtonBase.h" compile="0" resource="0"
+            file="Source/RoundButtonBase.h"/>
+      <FILE id="bxpVrw" name="CustomSliderLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/CustomSliderLookAndFeel.cpp"/>
+      <FILE id="ZwTRSK" name="CustomSliderLookAndFeel.h" compile="0" resource="0"
+            file="Source/CustomSliderLookAndFeel.h"/>
       <FILE id="IgvlmC" name="SearchComponent.cpp" compile="1" resource="0"
             file="Source/SearchComponent.cpp"/>
       <FILE id="P6FLlt" name="SearchComponent.h" compile="0" resource="0"
