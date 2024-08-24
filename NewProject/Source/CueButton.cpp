@@ -26,24 +26,13 @@ void CueButton::drawCentralContent(juce::Graphics& g, juce::Rectangle<float> bou
     auto center = bounds.getCentre();
     auto symbolSize = circleRadius * 0.3f;
 
-    // Draw the play symbol
-    juce::Path playSymbol;
-    playSymbol.addTriangle(center.x - symbolSize * 1.5f, center.y - symbolSize / 2.0f,
-        center.x - symbolSize * 0.7f, center.y,
-        center.x - symbolSize * 1.5f, center.y + symbolSize / 2.0f);
-    g.fillPath(playSymbol);
+    g.setFont(juce::Font(circleRadius * 0.4f));  // Adjust the size of the text as needed
 
-    // Draw the pause symbol
-    float barWidth = symbolSize / 4.0f;
-    g.fillRect(center.x + symbolSize * 0.5f, center.y - symbolSize / 2.0f, barWidth, symbolSize);
-    g.fillRect(center.x + symbolSize, center.y - symbolSize / 2.0f, barWidth, symbolSize);
+    // Set the color for the text
+    g.setColour(juce::Colours::orange);
 
-    // Draw the line symbol in the middle
-    float lineStartX = center.x + symbolSize * 0.15f;
-    float lineStartY = center.y - symbolSize * 0.6f;
-    float lineEndX = center.x - symbolSize * 0.15f;
-    float lineEndY = center.y + symbolSize * 0.6f;
-
-    g.drawLine(lineStartX, lineStartY, lineEndX, lineEndY, 2.0f);
+    // Draw the text in the center
+    juce::String buttonText = "CUE";
+    g.drawText(buttonText, bounds, juce::Justification::centred, true);
 }
 

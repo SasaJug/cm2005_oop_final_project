@@ -8,6 +8,7 @@
 
 #include <JuceHeader.h>
 #include "MainComponent.h"
+#include "Constants.h"
 
 //==============================================================================
 class NewProjectApplication  : public juce::JUCEApplication
@@ -62,16 +63,16 @@ public:
             : DocumentWindow (name,
                               juce::Desktop::getInstance().getDefaultLookAndFeel()
                                                           .findColour (juce::ResizableWindow::backgroundColourId),
-                              DocumentWindow::allButtons)
+                DocumentWindow::minimiseButton | DocumentWindow::closeButton)
         {
-            setUsingNativeTitleBar (true);
+            setUsingNativeTitleBar (false);
             setContentOwned (new MainComponent(), true);
 
            #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);
            #else
             setResizable (false, false);
-            centreWithSize (getWidth(), getHeight());
+            centreWithSize (Constants::windowWidth, Constants::windowHeight);
            #endif
 
             setVisible (true);

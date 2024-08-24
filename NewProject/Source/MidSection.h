@@ -13,6 +13,10 @@
 #include <JuceHeader.h>
 #include <juce_gui_basics/juce_gui_basics.h>
 #include "DJAudioPlayer.h"
+#include "VolumeSliderLookAndFeel.h"
+#include "Knob.h"
+#include "Constants.h"
+using namespace juce;
 
 //==============================================================================
 /*
@@ -37,6 +41,15 @@ private:
     juce::Slider volumeSlider1;
     juce::Slider volumeSlider2;
     juce::Slider volumeSliderTransition;
+    VolumeSliderLookAndFeel volumeSliderLookAndFeel;
+
+    Knob hiKnob1;
+    Knob midKnob1;
+    Knob lowKnob1;
+
+    Knob hiKnob2;
+    Knob midKnob2;
+    Knob lowKnob2;
 
     DJAudioPlayer* player1;
     DJAudioPlayer* player2;

@@ -6,7 +6,10 @@ MainComponent::MainComponent()
 {
 	// Make sure you set the size of the component after
 	// you add any child components.
-	setSize(984, 600);
+	setSize(
+		Constants::windowWidth,
+		Constants::windowHeight
+	);
 
 	// Some platforms require permissions to open input channels so request that here
 	if (juce::RuntimePermissions::isRequired(juce::RuntimePermissions::recordAudio)
@@ -65,7 +68,10 @@ void MainComponent::paint(juce::Graphics& g)
 	gradient.addColour(0.2, juce::Colour::fromRGB(0x32, 0x32, 0x32));
 	g.setGradientFill(gradient);
 	*/
-	g.setColour(juce::Colour::fromRGB(0x2c, 0x2c, 0x2c));
+	juce::ColourGradient baseGradient(Constants::backgroundColor.brighter(0.4f), getLocalBounds().getX(), getLocalBounds().getY(),
+		Constants::backgroundColor.darker(0.5f), getWidth(), getHeight(), false);
+	baseGradient.addColour(0.2, Constants::backgroundColor.brighter(0.1f));
+	g.setGradientFill(baseGradient);
 	g.fillRect(getLocalBounds());
 }
 
@@ -75,7 +81,7 @@ void MainComponent::resized()
 	// If you add any child components, this is where you should
 	// update their positions.
 
-	deck1.setBounds(0, 0, getWidth() * 0.38, getHeight());
-	midSection.setBounds(getWidth() * 0.38, 0, getWidth() * 0.24, getHeight());
-	deck2.setBounds(getWidth() * 0.62, 0, getWidth() * 0.38, getHeight());
+	deck1.setBounds(0, 0, getWidth() * 0.36, getHeight());
+	midSection.setBounds(getWidth() * 0.36, 0, getWidth() * 0.28, getHeight());
+	deck2.setBounds(getWidth() * 0.64, 0, getWidth() * 0.36, getHeight());
 }

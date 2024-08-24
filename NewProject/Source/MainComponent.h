@@ -5,6 +5,7 @@
 #include "DeckGUI.h"
 #include "MidSection.h"
 #include "DJAudioPlayer.h"
+#include "Constants.h"
 using namespace juce;
 
 //==============================================================================

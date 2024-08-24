@@ -18,6 +18,7 @@
 #include "CustomSliderLookAndFeel.h"
 #include "PlayPauseButton.h"
 #include "CueButton.h"
+#include "Constants.h"
 
 using namespace juce;
 

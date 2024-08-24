@@ -66,8 +66,8 @@ void DeckGUI::resized()
 	double rowH = getHeight()/11;
 	double columnW = getWidth()/11;
 
-	searchComponent.setBounds(columnW, 10, columnW * 9, columnW * 9);
-	speedSlider.setBounds(getWidth()*0.85, rowH*5, getWidth()*0.13, rowH*2.8);
+	searchComponent.setBounds(30, 10, 260, 260);
+	speedSlider.setBounds(getWidth()-Constants::smallMargin-50.0f, 250.0f, 50.0f, 155.0f);
 	cueButton.setBounds(10, rowH*5.7, rowH, rowH);
 	playPauseButton.setBounds(10, rowH * 6.8, rowH, rowH);
 	playlistComponent.setBounds(0, rowH * 8, getWidth(), rowH * 3);

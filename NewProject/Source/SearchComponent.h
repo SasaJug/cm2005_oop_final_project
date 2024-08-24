@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Constants.h"
 #include "DJAudioPlayer.h"
 using namespace juce;
 

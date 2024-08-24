@@ -8,6 +8,16 @@
             file="../../../CM2030-GP/final/resources/close-line-icon.svg"/>
     </GROUP>
     <GROUP id="{2746E5B9-4089-FA41-026D-5912DA22AA5F}" name="Source">
+      <FILE id="Vx4K3c" name="KnobLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/KnobLookAndFeel.cpp"/>
+      <FILE id="TKIYdV" name="KnobLookAndFeel.h" compile="0" resource="0"
+            file="Source/KnobLookAndFeel.h"/>
+      <FILE id="XfuNss" name="Constants.cpp" compile="1" resource="0" file="Source/Constants.cpp"/>
+      <FILE id="DE8UqZ" name="Constants.h" compile="0" resource="0" file="Source/Constants.h"/>
+      <FILE id="PgpANL" name="VolumeSliderLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/VolumeSliderLookAndFeel.cpp"/>
+      <FILE id="rlY8A7" name="VolumeSliderLookAndFeel.h" compile="0" resource="0"
+            file="Source/VolumeSliderLookAndFeel.h"/>
       <FILE id="pVIxIP" name="CueButton.cpp" compile="1" resource="0" file="Source/CueButton.cpp"/>
       <FILE id="ioAmKE" name="CueButton.h" compile="0" resource="0" file="Source/CueButton.h"/>
       <FILE id="gtW17w" name="PlayPauseButton.cpp" compile="1" resource="0"
@@ -37,6 +47,8 @@
       <FILE id="OqYjfZ" name="WaveformDisplay.h" compile="0" resource="0"
             file="Source/WaveformDisplay.h"/>
       <FILE id="RfBedV" name="DeckGUI.cpp" compile="1" resource="0" file="Source/DeckGUI.cpp"/>
+      <FILE id="mf2QjE" name="Knob.h" compile="0" resource="0" file="Source/Knob.h"/>
+      <FILE id="nuadKE" name="Knob.cpp" compile="1" resource="0" file="Source/Knob.cpp"/>
       <FILE id="E9keBJ" name="DeckGUI.h" compile="0" resource="0" file="Source/DeckGUI.h"/>
       <FILE id="E1H6MH" name="DJAudioPlayer.cpp" compile="1" resource="0"
             file="Source/DJAudioPlayer.cpp"/>

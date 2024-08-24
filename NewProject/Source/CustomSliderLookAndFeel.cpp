@@ -26,13 +26,13 @@ void CustomSliderLookAndFeel::drawLinearSlider(juce::Graphics& g,
     g.setColour(juce::Colours::lightgrey);
     // Determine the number of measuring lines you want to draw
     int numLines = 30; // Change this to control the number of measuring lines
-
+    float cornerRadius = 5.0f;
+    float lineThickness = 1.0f;
     if (style == juce::Slider::SliderStyle::LinearVertical)
     {
-                g.setColour(juce::Colours::lightgrey);
-        juce::Rectangle<float> border(x, y-10, width, height+20);
+        g.setColour(juce::Colours::lightgrey);
 
-        g.drawRect(border, 1.0f);
+        g.drawRoundedRectangle(x, y-10, width, height+20, cornerRadius, lineThickness);
 
         int step = height / numLines;
         int initialY = y + 1.5*step;
@@ -48,27 +48,15 @@ void CustomSliderLookAndFeel::drawLinearSlider(juce::Graphics& g,
             g.drawLine(x + length, lineY, x + width - length, lineY, 0.5f);
         }
     }
-    else if (style == juce::Slider::SliderStyle::LinearHorizontal)
-    {
-        // For horizontal sliders: draw vertical lines along the track
-        for (int i = 0; i <= numLines; ++i)
-        {
-            float proportion = i / static_cast<float>(numLines);
-            float lineX = proportion * width + x;
 
-            // Draw a line along the height of the slider's area
-            g.drawLine(lineX, y, lineX, y + height, 1.0f);
-        }
-    } 
     // Draw the background track (fader track)
     juce::Rectangle<float> track(x + width * 0.5f - 2.0f, y, 5.0f, height);
     g.setColour(juce::Colours::black);
     g.fillRect(track);
 
 
-    // Draw the slider thumb (fader cap)
-
-    juce::Rectangle<float> thumb(x + width * 0.5f - 20.0f, sliderPos - 10.0f, 40.0f, 15.0f);
+    // Draw the slider thumb
+    juce::Rectangle<float> thumb(x, sliderPos - 10.0f, width, 15.0f);
     g.setColour(juce::Colour::fromRGB(0x23, 0x23, 0x23));
     g.fillRect(thumb);
 
