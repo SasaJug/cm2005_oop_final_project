@@ -35,8 +35,9 @@ public:
 
     void resized() override; // Handle the resizing of the component
 
-private:
     juce::Slider knobSlider; // The rotary knob
+
+private:
     juce::Label knobLabel; // The label that appears below the knob
 
     KnobLookAndFeel knobLookAndFeel;

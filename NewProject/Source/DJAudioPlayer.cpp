@@ -16,7 +16,12 @@ DJAudioPlayer::~DJAudioPlayer() {}
 
 void DJAudioPlayer::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
 {
+    juce::dsp::ProcessSpec spec;
+    spec.maximumBlockSize = samplesPerBlockExpected;
+    spec.sampleRate = sampleRate;
+    spec.numChannels = 2;
 
+    equalizer.prepare(spec);
     transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
     resampleSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
@@ -24,6 +29,8 @@ void DJAudioPlayer::prepareToPlay(int samplesPerBlockExpected, double sampleRate
 void DJAudioPlayer::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
 {
     resampleSource.getNextAudioBlock(bufferToFill);
+    juce::dsp::AudioBlock<float> block(*bufferToFill.buffer);
+    equalizer.process(block);
 }
 
 void DJAudioPlayer::releaseResources() 
@@ -106,3 +113,12 @@ void DJAudioPlayer::stop()
 {
 	transportSource.stop(); 
 }
+
+void DJAudioPlayer::setLowGain(float gain) { 
+    DBG(gain);
+    equalizer.setLowGain(gain); 
+}
+
+void DJAudioPlayer::setMidGain(float gain) { equalizer.setMidGain(gain); }
+
+void DJAudioPlayer::setHighGain(float gain) { equalizer.setHighGain(gain); }

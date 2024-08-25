@@ -16,36 +16,43 @@ MidSection::MidSection(
     DJAudioPlayer* _player1, 
     DJAudioPlayer* _player2
     )
-    : player1(_player1), player2(_player2)
+    : player1(_player1), 
+      player2(_player2)
 {
     hiKnob1.setLabel("HI");
-    hiKnob1.setRange(0.0, 1.0, 0.01);
-    hiKnob1.setValue(0.5);
+    hiKnob1.setRange(-24.0f, 24.0f, 0.1f);
+    hiKnob1.setValue(0.0f);
+    hiKnob1.knobSlider.addListener(this);
     addAndMakeVisible(hiKnob1);
 
     midKnob1.setLabel("MID");
-    midKnob1.setRange(0.0, 1.0, 0.01);
-    midKnob1.setValue(0.5);
+    midKnob1.setRange(-24.0f, 24.0f, 0.1f);
+    midKnob1.setValue(0.0f);
+    midKnob1.knobSlider.addListener(this);
     addAndMakeVisible(midKnob1);
 
     lowKnob1.setLabel("LOW");
-    lowKnob1.setRange(0.0, 1.0, 0.01);
-    lowKnob1.setValue(0.5);
+    lowKnob1.setRange(-24.0f, 24.0f, 0.1f);
+    lowKnob1.setValue(0.0f);
+    lowKnob1.knobSlider.addListener(this);
     addAndMakeVisible(lowKnob1);
 
     hiKnob2.setLabel("HI");
-    hiKnob2.setRange(0.0, 1.0, 0.01);
-    hiKnob2.setValue(0.5);
+    hiKnob2.setRange(-24.0f, 24.0f, 0.1f);
+    hiKnob2.setValue(0.0f);
+    hiKnob2.knobSlider.addListener(this);
     addAndMakeVisible(hiKnob2);
 
     midKnob2.setLabel("MID");
-    midKnob2.setRange(0.0, 1.0, 0.01);
-    midKnob2.setValue(0.5);
+    midKnob2.setRange(-24.0f, 24.0f, 0.1f);
+    midKnob2.setValue(0.0f);
+    midKnob2.knobSlider.addListener(this);
     addAndMakeVisible(midKnob2);
 
     lowKnob2.setLabel("LOW");
-    lowKnob2.setRange(0.0, 1.0, 0.01);
-    lowKnob2.setValue(0.5);
+    lowKnob2.setRange(-24.0f, 24.0f, 0.1f);
+    lowKnob2.setValue(0.0f);
+    lowKnob2.knobSlider.addListener(this);
     addAndMakeVisible(lowKnob2);
 
     volumeSlider1.addListener(this);
@@ -158,12 +165,6 @@ void MidSection::resized()
     );
 }
 
-
-
-
-
-
-
 void MidSection::sliderValueChanged(juce::Slider* slider)
 {
 
@@ -179,6 +180,30 @@ void MidSection::sliderValueChanged(juce::Slider* slider)
 	{
 		player1->setGain(slider->getValue());
 		player2->setGain(1 - slider->getValue());
-	}
+    }
+    else if (slider == &hiKnob1.knobSlider)
+    {
+        player1->setHighGain(juce::Decibels::decibelsToGain(slider->getValue()));
+    }
+    else if (slider == &midKnob1.knobSlider)
+    {
+        player1->setMidGain(juce::Decibels::decibelsToGain(slider->getValue()));
+    }
+    else if (slider == &lowKnob1.knobSlider)
+    {
+        player1->setLowGain(juce::Decibels::decibelsToGain(slider->getValue()));
+    }
+    else if (slider == &hiKnob2.knobSlider)
+    {
+        player2->setHighGain(juce::Decibels::decibelsToGain(slider->getValue()));
+    }
+    else if (slider == &midKnob2.knobSlider)
+    {
+        player2->setMidGain(juce::Decibels::decibelsToGain(slider->getValue()));
+    }
+    else if (slider == &lowKnob2.knobSlider)
+    {
+        player2->setLowGain(juce::Decibels::decibelsToGain(slider->getValue()));
+    }
 
 }

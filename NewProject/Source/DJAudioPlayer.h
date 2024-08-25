@@ -12,6 +12,8 @@
 
 #include <JuceHeader.h>
 #include <juce_gui_basics/juce_gui_basics.h>
+#include "Equalizer.h"
+
 using namespace juce;
 
 class DJAudioPlayer : public AudioSource
@@ -37,11 +39,16 @@ class DJAudioPlayer : public AudioSource
 		void start();
 		void stop();	
 
+		void setLowGain(float gain);
+		void setMidGain(float gain);
+		void setHighGain(float gain);
+
 	private:
 		AudioFormatManager& formatManager;
 		juce::AudioTransportSource transportSource;
 		juce::ResamplingAudioSource resampleSource{ &transportSource, false, 2 };
 		std::unique_ptr<juce::AudioFormatReaderSource> readerSource;
+		Equalizer equalizer;
 
 		juce::FileChooser fChooser{ "Select a file..." };
 

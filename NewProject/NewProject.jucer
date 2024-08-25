@@ -8,6 +8,10 @@
             file="../../../CM2030-GP/final/resources/close-line-icon.svg"/>
     </GROUP>
     <GROUP id="{2746E5B9-4089-FA41-026D-5912DA22AA5F}" name="Source">
+      <FILE id="FkbgGz" name="Equalizer.cpp" compile="1" resource="0" file="Source/Equalizer.cpp"/>
+      <FILE id="ikpCDY" name="Equalizer.h" compile="0" resource="0" file="Source/Equalizer.h"/>
+      <FILE id="iY7WgQ" name="EventTypes.cpp" compile="1" resource="0" file="Source/EventTypes.cpp"/>
+      <FILE id="iGX75E" name="EventTypes.h" compile="0" resource="0" file="Source/EventTypes.h"/>
       <FILE id="Vx4K3c" name="KnobLookAndFeel.cpp" compile="1" resource="0"
             file="Source/KnobLookAndFeel.cpp"/>
       <FILE id="TKIYdV" name="KnobLookAndFeel.h" compile="0" resource="0"
@@ -48,8 +52,10 @@
             file="Source/WaveformDisplay.h"/>
       <FILE id="RfBedV" name="DeckGUI.cpp" compile="1" resource="0" file="Source/DeckGUI.cpp"/>
       <FILE id="mf2QjE" name="Knob.h" compile="0" resource="0" file="Source/Knob.h"/>
+      <FILE id="mZyOet" name="EventBus.h" compile="0" resource="0" file="Source/EventBus.h"/>
       <FILE id="nuadKE" name="Knob.cpp" compile="1" resource="0" file="Source/Knob.cpp"/>
       <FILE id="E9keBJ" name="DeckGUI.h" compile="0" resource="0" file="Source/DeckGUI.h"/>
+      <FILE id="s5hVek" name="EventBus.cpp" compile="1" resource="0" file="Source/EventBus.cpp"/>
       <FILE id="E1H6MH" name="DJAudioPlayer.cpp" compile="1" resource="0"
             file="Source/DJAudioPlayer.cpp"/>
       <FILE id="QxKjuw" name="DJAudioPlayer.h" compile="0" resource="0" file="Source/DJAudioPlayer.h"/>
@@ -67,6 +73,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -91,6 +98,7 @@
         <MODULEPATH id="juce_graphics" path="../../../../JUCE 5/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../../JUCE 5/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../../../JUCE 5/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../juce-8.0.0-windows/JUCE/modules"/>
       </MODULEPATHS>
     </VS2022>
   </EXPORTFORMATS>

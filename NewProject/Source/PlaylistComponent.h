@@ -13,6 +13,8 @@
 #include <JuceHeader.h>
 #include <juce_gui_basics/juce_gui_basics.h>
 #include "DJAudioPlayer.h"
+#include "EventBus.h"
+#include "EventTypes.h"
 using namespace juce;
 
 //==============================================================================
@@ -24,7 +26,7 @@ class PlaylistComponent  : public juce::Component,
                            public Button::Listener
 {
 public:
-    PlaylistComponent(DJAudioPlayer* _player);
+    PlaylistComponent(DJAudioPlayer* _player, int position);
 
     ~PlaylistComponent() override;
 
@@ -64,6 +66,9 @@ public:
 
 private:
     juce::FileChooser fChooser{ "Select a file..." };
+
+    int position;
+
     TableListBox tableComponent;
     std::vector<File> trackTitles;
 

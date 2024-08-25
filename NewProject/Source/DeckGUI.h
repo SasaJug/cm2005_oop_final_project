@@ -13,12 +13,13 @@
 #include <JuceHeader.h>
 #include <juce_gui_basics/juce_gui_basics.h>
 #include "DJAudioPlayer.h"
-#include "PlaylistComponent.h"
 #include "SearchComponent.h"
 #include "CustomSliderLookAndFeel.h"
 #include "PlayPauseButton.h"
 #include "CueButton.h"
 #include "Constants.h"
+#include "EventBus.h"
+#include "EventTypes.h"
 
 using namespace juce;
 
@@ -27,13 +28,12 @@ using namespace juce;
 */
 class DeckGUI  : public juce::Component,
                  public juce::Button::Listener,
-                 public juce::Slider::Listener,
-                 public Timer
+                 public juce::Slider::Listener
 {
 public:
-    DeckGUI(DJAudioPlayer* player,
-        AudioFormatManager& formatManagerToUse,
-        AudioThumbnailCache& cacheToUse);
+    DeckGUI(
+        DJAudioPlayer* player
+    );
 
     ~DeckGUI() override;
 
@@ -45,8 +45,6 @@ public:
 
     void sliderValueChanged(juce::Slider* slider) override;
 
-    void timerCallback() override;
-
 private:
 
     bool isPlaying = false;
@@ -54,7 +52,6 @@ private:
 
     DJAudioPlayer* player;
 
-    PlaylistComponent playlistComponent { player };
     SearchComponent searchComponent;
     CustomSliderLookAndFeel customSliderLookAndFeel;
     PlayPauseButton playPauseButton;
@@ -62,9 +59,9 @@ private:
 
     double position;
 
-    void loadURL(URL audioURL);
-    void setPositíonRelative(double pos);
+    void setPositionRelative(const std::string& position);
 
-   
+    std::function<void(const std::string&)> timerTickCallback;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };

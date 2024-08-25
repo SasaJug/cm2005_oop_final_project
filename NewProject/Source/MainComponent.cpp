@@ -24,9 +24,16 @@ MainComponent::MainComponent()
 		setAudioChannels(2, 2);
 	}
 
+	startTimer(200);
+
 	addAndMakeVisible(deck1);
 	addAndMakeVisible(deck2);
 	addAndMakeVisible(midSection);
+
+	addAndMakeVisible(playlistComponent2);
+	addAndMakeVisible(playlistComponent1);
+	addAndMakeVisible(waveformDisplay1);
+	addAndMakeVisible(waveformDisplay2);
 }
 
 MainComponent::~MainComponent()
@@ -81,7 +88,32 @@ void MainComponent::resized()
 	// If you add any child components, this is where you should
 	// update their positions.
 
-	deck1.setBounds(0, 0, getWidth() * 0.36, getHeight());
-	midSection.setBounds(getWidth() * 0.36, 0, getWidth() * 0.28, getHeight());
-	deck2.setBounds(getWidth() * 0.64, 0, getWidth() * 0.36, getHeight());
+	deck1.setBounds(0, 0, getWidth() * 0.36, 600);
+	playlistComponent1.setBounds(0, 416, getWidth() * 0.36, 156);
+
+	midSection.setBounds(getWidth() * 0.36, 0, getWidth() * 0.28, 1014);
+
+	deck2.setBounds(getWidth() * 0.64, 0, getWidth() * 0.36, 600);
+	playlistComponent2.setBounds(getWidth() * 0.64, 416, getWidth() * 0.36, 156);
+
+
+	waveformDisplay1.setBounds(
+		getWidth() * 0.36,
+		416.0f,
+		getWidth() * 0.28,
+		78
+	);
+	waveformDisplay2.setBounds(
+		getWidth() * 0.36,
+		494.0f,
+		getWidth() * 0.28,
+		78
+	);
 }
+
+
+void MainComponent::timerCallback()
+{
+	EventBus::getInstance().triggerEvent(EventTypes::TIMER_TICK_EVENT, "");
+}
+
