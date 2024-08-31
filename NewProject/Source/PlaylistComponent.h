@@ -26,7 +26,7 @@ class PlaylistComponent  : public juce::Component,
                            public Button::Listener
 {
 public:
-    PlaylistComponent(DJAudioPlayer* _player, int position);
+    PlaylistComponent(DJAudioPlayer* _player, int _side);
 
     ~PlaylistComponent() override;
 
@@ -67,7 +67,7 @@ public:
 private:
     juce::FileChooser fChooser{ "Select a file..." };
 
-    int position;
+    int side;
 
     TableListBox tableComponent;
     std::vector<File> trackTitles;

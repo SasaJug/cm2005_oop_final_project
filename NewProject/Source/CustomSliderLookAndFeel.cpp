@@ -21,18 +21,13 @@ void CustomSliderLookAndFeel::drawLinearSlider(juce::Graphics& g,
     const juce::Slider::SliderStyle style, juce::Slider& slider)
 {
 
-    // Draw white measuring lines around the slid
-// er
-    g.setColour(juce::Colours::lightgrey);
-    // Determine the number of measuring lines you want to draw
-    int numLines = 30; // Change this to control the number of measuring lines
-    float cornerRadius = 5.0f;
-    float lineThickness = 1.0f;
     if (style == juce::Slider::SliderStyle::LinearVertical)
     {
-        g.setColour(juce::Colours::lightgrey);
+        int numLines = 30;
+        int lineThickness = 1;
+        g.setColour(Constants::textColor);
 
-        g.drawRoundedRectangle(x, y-10, width, height+20, cornerRadius, lineThickness);
+        g.drawRect(x, y-10, width, height+20, lineThickness);
 
         int step = height / numLines;
         int initialY = y + 1.5*step;
@@ -49,18 +44,27 @@ void CustomSliderLookAndFeel::drawLinearSlider(juce::Graphics& g,
         }
     }
 
-    // Draw the background track (fader track)
     juce::Rectangle<float> track(x + width * 0.5f - 2.0f, y, 5.0f, height);
     g.setColour(juce::Colours::black);
     g.fillRect(track);
 
+    juce::ColourGradient thumbGradient(juce::Colours::darkgrey, width / 2, sliderPos - 20.0f,
+        juce::Colours::black, width / 2, sliderPos + 20.0f, false);
+    thumbGradient.addColour(0.25f, juce::Colours::black);
+    thumbGradient.addColour(0.27f, juce::Colours::darkgrey);
+    thumbGradient.addColour(0.35f, juce::Colours::darkgrey.darker(0.4f));
+    thumbGradient.addColour(0.70f, juce::Colours::darkgrey.darker(0.8f));
+    thumbGradient.addColour(0.75f, juce::Colours::black);
+    thumbGradient.addColour(0.85f, juce::Colours::darkgrey.darker(0.8f));
+    g.setGradientFill(thumbGradient);
 
-    // Draw the slider thumb
-    juce::Rectangle<float> thumb(x, sliderPos - 10.0f, width, 15.0f);
-    g.setColour(juce::Colour::fromRGB(0x23, 0x23, 0x23));
+    juce::Rectangle<float> thumb(x+3, sliderPos - 20.0f, width-6, 40.0f);
     g.fillRect(thumb);
 
-    // Draw a border around the thumb
+    juce::Rectangle<float> thumbCut(x+3, sliderPos-2, width-6, 2.0f);
+    g.setColour(juce::Colours::black.withAlpha(0.7f));
+    g.fillRect(thumbCut);
+
     g.setColour(juce::Colours::black.withAlpha(1.0f));
     g.drawRect(thumb);
 }

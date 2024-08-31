@@ -90,9 +90,84 @@ MidSection::~MidSection()
 
 void MidSection::paint (juce::Graphics& g)
 {
-    g.setColour(Colours::grey);
-    g.drawLine(0,0,0,getHeight(), 2.0f);
-    g.drawLine(getWidth(), 0, getWidth(), getHeight(), 2.0f);
+    g.setColour(Constants::textColor);
+
+    //eq text left
+    g.drawLine(
+        Constants::mediumMargin+70, 
+        Constants::smallMargin+42, 
+        Constants::mediumMargin + 70 + 5, 
+        Constants::smallMargin + 42, 
+        1.0f);
+
+    g.drawLine(
+        Constants::mediumMargin + 70 + 5,
+        Constants::smallMargin + 42, 
+        Constants::mediumMargin + 70 + 5,
+        Constants::smallMargin + 105,
+        1.0f);
+
+    g.setFont(10.0f);
+    g.drawText("EQ", Constants::mediumMargin + 70, Constants::smallMargin + 105, 20, 12, juce::Justification::left);
+
+
+    g.drawLine(
+        Constants::mediumMargin + 70 + 5,
+        Constants::smallMargin + 118,
+        Constants::mediumMargin + 70 + 5,
+        Constants::smallMargin + 183,
+        1.0f);
+
+    g.drawLine(
+        Constants::mediumMargin + 70 + 5,
+        Constants::smallMargin + 183,
+        Constants::mediumMargin + 70,
+        Constants::smallMargin + 183,
+        1.0f);
+
+    //eq text right
+    g.drawLine(
+        getWidth() - Constants::mediumMargin - 70,
+        Constants::smallMargin + 42,
+        getWidth() - Constants::mediumMargin - 70 - 5,
+        Constants::smallMargin + 42,
+        1.0f);
+
+    g.drawLine(
+        getWidth() - Constants::mediumMargin - 70 - 5,
+        Constants::smallMargin + 42,
+        getWidth() - Constants::mediumMargin - 70 - 5,
+        Constants::smallMargin + 105,
+        1.0f);
+
+    g.setFont(10.0f);
+    g.drawText("EQ", getWidth() - Constants::mediumMargin - 70 - 10, Constants::smallMargin + 105, 20, 12, juce::Justification::left);
+
+
+    g.drawLine(
+        getWidth() - Constants::mediumMargin - 70 - 5,
+        Constants::smallMargin + 118,
+        getWidth() - Constants::mediumMargin - 70 - 5,
+        Constants::smallMargin + 183,
+        1.0f);
+
+    g.drawLine(
+        getWidth() - Constants::mediumMargin - 70 - 5,
+        Constants::smallMargin + 183,
+        getWidth() - Constants::mediumMargin - 70,
+        Constants::smallMargin + 183,
+        1.0f);
+
+
+    // transition slider text
+    g.drawLine(0,5,0,getHeight()-5, 3.0f);
+    g.drawLine(getWidth(), 5, getWidth(), getHeight()-5, 3.0f);
+
+    g.setFont(10.0f);
+    g.drawText("TRANSITION FX", 80, 317, 100, 12, juce::Justification::centredBottom);
+
+    g.drawLine(105, 337, 130, 343, 2.0f);
+    g.drawLine(130, 343, 155, 337, 2.0f);
 }
 
 void MidSection::resized()
@@ -158,7 +233,7 @@ void MidSection::resized()
 
     // Position the horizontal slider in the center-bottom area
     volumeSliderTransition.setBounds(
-        70.0f,
+        80.0f,
         350.0f,
         100.0f,
         60.0f

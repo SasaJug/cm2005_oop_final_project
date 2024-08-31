@@ -80,6 +80,21 @@ void MainComponent::paint(juce::Graphics& g)
 	baseGradient.addColour(0.2, Constants::backgroundColor.brighter(0.1f));
 	g.setGradientFill(baseGradient);
 	g.fillRect(getLocalBounds());
+
+	// Define the text for the first line
+	juce::String textLine1 = "CM2005 OOP";
+
+	// Define the text for the second line
+	juce::String textLine2 = "OTODECKS";
+
+	int xPosition = 5;
+	int yPosition = 5;
+	g.setColour(Constants::textColor);
+	g.setFont(11.0f);
+	g.drawText(textLine1, xPosition, yPosition, 100, 12, juce::Justification::left);
+
+	g.setFont(12.0f);
+	g.drawText(textLine2, xPosition, yPosition + 12, 100, 13, juce::Justification::left);
 }
 
 void MainComponent::resized()
@@ -91,7 +106,7 @@ void MainComponent::resized()
 	deck1.setBounds(0, 0, getWidth() * 0.36, 600);
 	playlistComponent1.setBounds(0, 416, getWidth() * 0.36, 156);
 
-	midSection.setBounds(getWidth() * 0.36, 0, getWidth() * 0.28, 1014);
+	midSection.setBounds(getWidth() * 0.36, 0, getWidth() * 0.28, 416);
 
 	deck2.setBounds(getWidth() * 0.64, 0, getWidth() * 0.36, 600);
 	playlistComponent2.setBounds(getWidth() * 0.64, 416, getWidth() * 0.36, 156);

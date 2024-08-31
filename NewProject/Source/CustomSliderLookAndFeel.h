@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Constants.h"
 
 class CustomSliderLookAndFeel : public juce::LookAndFeel_V4
 {

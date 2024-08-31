@@ -44,11 +44,11 @@ private:
     AudioThumbnailCache thumbCache{ 100 };
    
     DJAudioPlayer player1 { formatManager };
-    DeckGUI deck1{ &player1};
+    DeckGUI deck1{ &player1, 1};
     PlaylistComponent playlistComponent1{ &player1, 1 };
 
     DJAudioPlayer player2 { formatManager };
-    DeckGUI deck2{ &player2 };
+    DeckGUI deck2{ &player2, 2 };
     PlaylistComponent playlistComponent2{ &player2, 2 };
 
     MidSection midSection { &player1, &player2 };

@@ -11,14 +11,8 @@
 #pragma once
 
 #include <JuceHeader.h>
-
-//==============================================================================
-/*
-*/
-#pragma once
-
-#include <JuceHeader.h>
 #include "KnobLookAndFeel.h"
+#include "Constants.h"
 
 class Knob : public juce::Component
 {

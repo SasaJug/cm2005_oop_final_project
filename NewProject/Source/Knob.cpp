@@ -24,17 +24,14 @@ Knob::Knob()
 
     // Set up the label that appears above the knob
     knobLabel.setFont(juce::Font(11.0f));
-    knobLabel.setColour(juce::Label::textColourId, juce::Colours::lightgrey);
+    knobLabel.setColour(juce::Label::textColourId, Constants::textColor);
     knobLabel.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(knobLabel);
-
-    // Default knob color (used in future customization if needed)
-    knobSlider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::blue);
 }
 
 Knob::~Knob()
 {
-    knobSlider.setLookAndFeel(nullptr); // Clean up custom look-and-feel
+    knobSlider.setLookAndFeel(nullptr);
 }
 
 void Knob::setRange(double minValue, double maxValue, double interval)

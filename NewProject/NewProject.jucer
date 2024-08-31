@@ -8,6 +8,10 @@
             file="../../../CM2030-GP/final/resources/close-line-icon.svg"/>
     </GROUP>
     <GROUP id="{2746E5B9-4089-FA41-026D-5912DA22AA5F}" name="Source">
+      <FILE id="sDFWKg" name="RedSquareButton.cpp" compile="1" resource="0"
+            file="Source/RedSquareButton.cpp"/>
+      <FILE id="dHLDbS" name="RedSquareButton.h" compile="0" resource="0"
+            file="Source/RedSquareButton.h"/>
       <FILE id="FkbgGz" name="Equalizer.cpp" compile="1" resource="0" file="Source/Equalizer.cpp"/>
       <FILE id="ikpCDY" name="Equalizer.h" compile="0" resource="0" file="Source/Equalizer.h"/>
       <FILE id="iY7WgQ" name="EventTypes.cpp" compile="1" resource="0" file="Source/EventTypes.cpp"/>
@@ -56,6 +60,10 @@
       <FILE id="nuadKE" name="Knob.cpp" compile="1" resource="0" file="Source/Knob.cpp"/>
       <FILE id="E9keBJ" name="DeckGUI.h" compile="0" resource="0" file="Source/DeckGUI.h"/>
       <FILE id="s5hVek" name="EventBus.cpp" compile="1" resource="0" file="Source/EventBus.cpp"/>
+      <FILE id="PPZI9c" name="SquareButtonBase.cpp" compile="1" resource="0"
+            file="Source/SquareButtonBase.cpp"/>
+      <FILE id="Id3hz1" name="SquareButtonBase.h" compile="0" resource="0"
+            file="Source/SquareButtonBase.h"/>
       <FILE id="E1H6MH" name="DJAudioPlayer.cpp" compile="1" resource="0"
             file="Source/DJAudioPlayer.cpp"/>
       <FILE id="QxKjuw" name="DJAudioPlayer.h" compile="0" resource="0" file="Source/DJAudioPlayer.h"/>

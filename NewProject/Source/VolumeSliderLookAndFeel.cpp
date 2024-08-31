@@ -22,11 +22,7 @@ void VolumeSliderLookAndFeel::drawLinearSlider(juce::Graphics& g,
     const juce::Slider::SliderStyle style, juce::Slider& slider)
 {
 
-    // Draw white measuring lines around the slid
-// er
-    g.setColour(juce::Colours::lightgrey);
-    // Determine the number of measuring lines you want to draw
-    int numLines = 12; // Change this to control the number of measuring lines
+    int numLines = 10; // Change this to control the number of measuring lines
 
     if (style == juce::Slider::SliderStyle::LinearVertical)
     {
@@ -34,24 +30,33 @@ void VolumeSliderLookAndFeel::drawLinearSlider(juce::Graphics& g,
         for (int i = 0; i <= numLines; ++i)
         {
             float lineY =y +  i * step;
+            float lineThickness = 0.5f;
+            if(i == 0 || i == numLines)
+            {
+                lineThickness = 1.0f;
+            }
 
-            // Draw a line across the width of the slider's area
-            g.drawLine(x, lineY, x + width, lineY, 0.5f);
+            g.setColour(Constants::textColor);
+            g.drawLine(x, lineY, x + width, lineY, lineThickness);
         }
-        // Draw the slider track
-        juce::Rectangle<float> track(x + width * 0.5f - 2.0f, y, 5.0f, height);
+
+        juce::Rectangle<float> track(x + width * 0.5f - 2.0f, y, 5.0f, height-5);
         g.setColour(juce::Colours::black);
         g.fillRect(track);
 
+        juce::ColourGradient thumbGradient(juce::Colours::grey.darker(0.4f), width / 2, sliderPos - 10.0f,
+            juce::Colours::black, width/2, sliderPos + 5.0f, false);
+        g.setGradientFill(thumbGradient);
 
-        // Draw the slider thumb
         juce::Rectangle<float> thumb(x, sliderPos - 10.0f, width, 15.0f);
-        g.setColour(juce::Colour::fromRGB(0x23, 0x23, 0x23));
         g.fillRect(thumb);
 
-        // Draw a border around the thumb
-        g.setColour(juce::Colours::black.withAlpha(1.0f));
-        g.drawRect(thumb);
+        juce::Rectangle<float> thumbCut(x, sliderPos - 4.0f, width, 2.0f);
+        g.setColour(juce::Colours::black.withAlpha(0.7f));
+        g.fillRect(thumbCut);
+
+       g.setColour(juce::Colours::black.withAlpha(0.5f));
+       g.drawRect(thumb);
     }
     else if (style == juce::Slider::SliderStyle::LinearHorizontal)
     {
@@ -59,22 +64,32 @@ void VolumeSliderLookAndFeel::drawLinearSlider(juce::Graphics& g,
         for (int i = 0; i <= numLines; ++i)
         {
             float lineX = x + i * step;
+            float lineThickness = 0.5f;
+            if (i == 0 || i == numLines)
+            {
+                lineThickness = 1.0f;
+            }
 
-            // Draw a line across the height of the slider's area
-            g.drawLine(lineX, y, lineX, y+height, 0.5f);
+            g.setColour(Constants::textColor);
+            g.drawLine(lineX, y, lineX, y+height, lineThickness);
         }
-        // Draw the slider track
-        juce::Rectangle<float> track(x, y + height * 0.5f - 2.0f, width, 5.0f);
+
+        juce::Rectangle<float> track(x, y + height * 0.5f - 2.0f, width-5, 5.0f);
         g.setColour(juce::Colours::black);
         g.fillRect(track);
 
 
-        // Draw the slider thumb
+        juce::ColourGradient thumbGradient(juce::Colours::grey.darker(0.4f), sliderPos - 10.0f, height / 2,
+            juce::Colours::black, sliderPos + 5.0f, height / 2,  false);
+        g.setGradientFill(thumbGradient);
+
         juce::Rectangle<float> thumb(sliderPos - 10.0f, y, 15.0f, height);
-        g.setColour(juce::Colour::fromRGB(0x23, 0x23, 0x23));
         g.fillRect(thumb);
 
-        // Draw a border around the thumb
+        juce::Rectangle<float> thumbCut(sliderPos - 4.0f, y, 2.0f, width);
+        g.setColour(juce::Colours::black.withAlpha(0.7f));
+        g.fillRect(thumbCut);
+
         g.setColour(juce::Colours::black.withAlpha(1.0f));
         g.drawRect(thumb);
     }

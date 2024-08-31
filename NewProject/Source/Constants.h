@@ -23,4 +23,6 @@ namespace Constants
 
     extern const juce::Colour backgroundColor;
     extern const float colorAlpha;
+
+    extern const juce::Colour textColor;
 }

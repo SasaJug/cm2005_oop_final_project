@@ -12,9 +12,9 @@
 #include "PlaylistComponent.h"
 
 //==============================================================================
-PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player, int _position) 
+PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player, int _side) 
     : player(_player),
-      position(_position)
+      side(_side)
 {
 
     addButton.addListener(this);
@@ -96,7 +96,7 @@ void PlaylistComponent::selectedRowsChanged(int lastRowSelected)
         player->loadURL(url);
         EventBus::getInstance().triggerEvent(
             EventTypes::FILE_LOADED_EVENT,
-            std::to_string(position) + "," + url.toString(false).toStdString()); // position,url
+            std::to_string(side) + "," + url.toString(false).toStdString()); // side,url
     }
 
 }
@@ -144,10 +144,6 @@ void PlaylistComponent::buttonClicked(Button* button)
                 URL url = URL{ chosenFile };
                 trackTitles.push_back(chosenFile);
                 tableComponent.updateContent();
-                //player->loadURL(url);
-                //EventBus::getInstance().triggerEvent(
-                //    EventTypes::FILE_LOADED_EVENT,
-                //    std::to_string(position) + "," + url.toString(false).toStdString()); // position,url
             });
     }
     else

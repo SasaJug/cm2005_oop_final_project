@@ -21,5 +21,7 @@ namespace Constants{
 	const juce::Colour backgroundColor = juce::Colour::fromRGB(0x2c, 0x2c, 0x2c);
 	const float colorAlpha = 0.6f;
 
+	const juce::Colour textColor = juce::Colours::white.withAlpha(0.7f);
+
 }
 

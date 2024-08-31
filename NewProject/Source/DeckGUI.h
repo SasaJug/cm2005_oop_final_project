@@ -16,6 +16,7 @@
 #include "SearchComponent.h"
 #include "CustomSliderLookAndFeel.h"
 #include "PlayPauseButton.h"
+#include "RedSquareButton.h"
 #include "CueButton.h"
 #include "Constants.h"
 #include "EventBus.h"
@@ -32,7 +33,8 @@ class DeckGUI  : public juce::Component,
 {
 public:
     DeckGUI(
-        DJAudioPlayer* player
+        DJAudioPlayer* player,
+        int side
     );
 
     ~DeckGUI() override;
@@ -47,6 +49,8 @@ public:
 
 private:
 
+    int side;
+
     bool isPlaying = false;
     juce::Slider speedSlider;
 
@@ -56,6 +60,15 @@ private:
     CustomSliderLookAndFeel customSliderLookAndFeel;
     PlayPauseButton playPauseButton;
     CueButton cueButton;
+
+    RedSquareButton redButton1{ "redButton1" };
+    RedSquareButton redButton2{ "redButton2" };
+    RedSquareButton redButton3{ "redButton3" };
+    RedSquareButton redButton4{ "redButton4" };
+    RedSquareButton redButton5{ "redButton5" };
+    RedSquareButton redButton6{ "redButton6" };
+    RedSquareButton redButton7{ "redButton7" };
+    RedSquareButton redButton8{ "redButton8" };
 
     double position;
 
