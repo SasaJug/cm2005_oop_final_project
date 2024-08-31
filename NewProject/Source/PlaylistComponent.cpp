@@ -31,20 +31,11 @@ PlaylistComponent::~PlaylistComponent()
 
 void PlaylistComponent::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 }
 
 void PlaylistComponent::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
     tableComponent.getHeader().setColumnWidth(0, getWidth()*0.90);
     tableComponent.getHeader().setColumnWidth(1, getWidth()*0.10);
     int buttonHeight = 30;
@@ -90,19 +81,26 @@ void PlaylistComponent::paintCell(Graphics& g,
 
 void PlaylistComponent::selectedRowsChanged(int lastRowSelected)
 {
-    if(lastRowSelected >= 0) {
+    // Check if the selected row is the same as the previous one
+    if (lastRowSelected == previouslySelectedRow)
+        return;
+
+    if (lastRowSelected >= 0) {
         tableComponent.selectRow(lastRowSelected);
         URL url = URL{ trackTitles[lastRowSelected] };
         player->loadURL(url);
         EventBus::getInstance().triggerEvent(
             EventTypes::FILE_LOADED_EVENT,
-            std::to_string(side) + "," + url.toString(false).toStdString()); // side,url
+            std::to_string(side) + "," + url.toString(false).toStdString()); // payload: "side,url"
     }
 
+    // Update the previously selected row
+    previouslySelectedRow = lastRowSelected;
 }
 
 void PlaylistComponent::cellClicked(int rowNumber, int columnId, const MouseEvent&)
 {
+    DBG("Cell clicked: " + std::to_string(columnId));
 	tableComponent.selectRow(rowNumber);
 }
 
@@ -130,14 +128,7 @@ void PlaylistComponent::buttonClicked(Button* button)
 {
     if (button == &addButton)
     {
-        // this does work in 6.1 but the syntax is a little funky
-        // https://docs.juce.com/master/classFileChooser.html#ac888983e4abdd8401ba7d6124ae64ff3
-        // - configure the dialogue
-        auto fileChooserFlags =
-            FileBrowserComponent::canSelectFiles;
-        // - launch out of the main thread
-        // - note how we use a lambda function which you've probably
-        // not seen before. Please do not worry too much about that. 
+        auto fileChooserFlags = FileBrowserComponent::canSelectFiles;
         fChooser.launchAsync(fileChooserFlags, [this](const FileChooser& chooser)
             {
                 File chosenFile = chooser.getResult();
@@ -149,14 +140,35 @@ void PlaylistComponent::buttonClicked(Button* button)
     else
     {
         int id = std::stoi(button->getComponentID().toStdString());
-        DBG("PlaylistComponent::buttonClicked " << trackTitles[id].getFileName() << "");
-        if(id == tableComponent.getSelectedRow())
-		{
-			player->unload();
+        int currentlySelectedRow = tableComponent.getSelectedRow();
+
+        if (id == currentlySelectedRow)
+        {
+            player->stop();
+            player->setPositionRelative(0.0);
+            player->unload();
             tableComponent.deselectAllRows();
-		}
+            EventBus::getInstance().triggerEvent(
+                EventTypes::CURRENT_FILE_REMOVED,
+                std::to_string(side)// payload: "side"
+            );
+        }
+
         trackTitles.erase(trackTitles.begin() + id);
+
+        // Adjust the selected row index if necessary
+        if (currentlySelectedRow > id && currentlySelectedRow > 0)
+        {
+            currentlySelectedRow--; // Move selection up by one row
+        }
+
         tableComponent.updateContent();
+
+        // Re-select the correct row after deletion
+        if (currentlySelectedRow >= 0 && currentlySelectedRow < trackTitles.size())
+        {
+            tableComponent.selectRow(currentlySelectedRow);
+        }
     }
 }
 

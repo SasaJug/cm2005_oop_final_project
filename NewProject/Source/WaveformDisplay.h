@@ -26,7 +26,7 @@ public:
     WaveformDisplay(AudioFormatManager& formatManagerToUse,
                     AudioThumbnailCache& cacheToUse,
                     DJAudioPlayer* player,
-                    int position);
+                    int side);
 
     ~WaveformDisplay() override;
 
@@ -36,6 +36,7 @@ public:
     void loadURL(URL audioURL);
     void changeListenerCallback(ChangeBroadcaster* source) override;
     void setPositionRelative(const std::string& placeholder);
+    void handleFileRemoved(const std::string& placeholder);
 
 private:
 
@@ -43,12 +44,13 @@ private:
     AudioThumbnail audioThumbnail;
     bool fileLoaded;
     double position;
-    int guiPosition;
+    int side;
 
     void loadURLfromEvent(std::string payload);
 
     std::function<void(const std::string&)> fileLoadedCallback;
     std::function<void(const std::string&)> timerTickCallback;
+    std::function<void(const std::string&)> fileRemovedCallback;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WaveformDisplay)
 };

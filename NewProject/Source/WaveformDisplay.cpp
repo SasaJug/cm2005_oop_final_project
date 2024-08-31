@@ -15,10 +15,10 @@
 WaveformDisplay::WaveformDisplay(AudioFormatManager& formatManagerToUse,
                                  AudioThumbnailCache& cacheToUse,
                                  DJAudioPlayer* _player,
-                                 int _position)
+                                 int _side)
     : audioThumbnail(1000, formatManagerToUse, cacheToUse),
       player(_player),
-      guiPosition(_position),
+      side(_side),
       fileLoaded(false),
       position(0.0)
 {
@@ -29,6 +29,9 @@ WaveformDisplay::WaveformDisplay(AudioFormatManager& formatManagerToUse,
 
     timerTickCallback = std::bind(&WaveformDisplay::setPositionRelative, this, std::placeholders::_1);
     EventBus::getInstance().subscribe(EventTypes::TIMER_TICK_EVENT, timerTickCallback);
+
+    fileRemovedCallback = std::bind(&WaveformDisplay::handleFileRemoved, this, std::placeholders::_1);
+    EventBus::getInstance().subscribe(EventTypes::CURRENT_FILE_REMOVED, fileRemovedCallback);
 
     audioThumbnail.addChangeListener(this);
 }
@@ -48,7 +51,7 @@ void WaveformDisplay::paint (juce::Graphics& g)
         g.setColour(Colours::lightgreen);
         audioThumbnail.drawChannel(g, getLocalBounds(), 0, audioThumbnail.getTotalLength(), 0, 1);
         g.setColour(Colours::lightgreen);
-        g.drawRect(position * getWidth()-getWidth()/40, 0, getWidth() / 20, getHeight());
+        g.drawRect(position * getWidth()-(getWidth()/40.0f), 0, getWidth() / 20, getHeight());
     }
     else
     {
@@ -86,8 +89,19 @@ void WaveformDisplay::setPositionRelative(const std::string& placeholder)
     }
 }
 
+void WaveformDisplay::handleFileRemoved(const std::string& side)
+{
+    if (side == std::to_string(this->side))
+    {
+        audioThumbnail.clear();
+        fileLoaded = false;
+        repaint();
+    }
+}
+
 void WaveformDisplay::loadURLfromEvent(std::string payload)
 {
+    DBG("WaveformDisplay::loadURLfromEvent: " << payload);
     std::vector<std::string> tokens;
     std::stringstream ss(payload);
     std::string token;
@@ -97,10 +111,8 @@ void WaveformDisplay::loadURLfromEvent(std::string payload)
         tokens.push_back(token);
     }
 
-    if (std::stoi(tokens[0]) == guiPosition) {
+    if (std::stoi(tokens[0]) == side) {
         juce::String juceStr(tokens[1]);
-
-        // Create a juce::URL from the juce::String
         juce::URL url(juceStr);
         loadURL(url);
     }

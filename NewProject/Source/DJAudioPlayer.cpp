@@ -60,6 +60,11 @@ void DJAudioPlayer::unload()
     transportSource.setSource(nullptr);
 }
 
+double DJAudioPlayer::getGain()
+{
+    return transportSource.getGain();
+}
+
 void DJAudioPlayer::setGain(double gain) 
 {
     if(gain < 0.0 || gain > 1.0) return;

@@ -73,8 +73,10 @@ private:
     double position;
 
     void setPositionRelative(const std::string& position);
+    void handleFileUnloaded(const std::string& position);
 
     std::function<void(const std::string&)> timerTickCallback;
+    std::function<void(const std::string&)> fileRemovedCallback;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };

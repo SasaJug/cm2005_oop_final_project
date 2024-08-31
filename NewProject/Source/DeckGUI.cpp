@@ -9,8 +9,6 @@
 */
 #include "DeckGUI.h"
 
-
-//==============================================================================
 DeckGUI::DeckGUI(
 	DJAudioPlayer* _player,
 	int _side
@@ -25,6 +23,9 @@ DeckGUI::DeckGUI(
 
 	timerTickCallback = std::bind(&DeckGUI::setPositionRelative, this, std::placeholders::_1);
 	EventBus::getInstance().subscribe(EventTypes::TIMER_TICK_EVENT, timerTickCallback);
+
+	fileRemovedCallback = std::bind(&DeckGUI::setPositionRelative, this, std::placeholders::_1);
+	EventBus::getInstance().subscribe(EventTypes::CURRENT_FILE_REMOVED, fileRemovedCallback);
 
 	playPauseButton.addListener(this);
 	cueButton.addListener(this);
@@ -120,16 +121,25 @@ void DeckGUI::resized()
 
 }
 
-void DeckGUI::setPositionRelative(const std::string& position)
+void DeckGUI::setPositionRelative(const std::string& placeholder)
 {
 	double pos = player->getPositionRelative();
 		if (pos >= 1.0) {
 			isPlaying = false;
-			//playPauseButton.setButtonText("PLAY");
 			player->stop();
 			player->setPositionRelative(0.0);
 			repaint();
 		}
+}
+
+void DeckGUI::handleFileUnloaded(const std::string& side)
+{
+	if (side == std::to_string(this->side))
+	{
+		isPlaying = false;
+		//playPauseButton.setButtonText("PLAY");
+		repaint();
+	}
 }
 
 void DeckGUI::buttonClicked(juce::Button* button)

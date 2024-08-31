@@ -16,6 +16,8 @@
 #include "VolumeSliderLookAndFeel.h"
 #include "Knob.h"
 #include "Constants.h"
+#include "EventBus.h"
+#include "EventTypes.h"
 using namespace juce;
 
 //==============================================================================
@@ -37,6 +39,10 @@ public:
     void sliderValueChanged(juce::Slider* slider) override;
 
 private:
+
+
+    std::function<void(const std::string&)> fileLoadedCallback;
+    void reevaluateSliders(const std::string& placeholder);
 
     juce::Slider volumeSlider1;
     juce::Slider volumeSlider2;

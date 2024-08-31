@@ -13,4 +13,5 @@
 namespace EventTypes {
     const std::string TIMER_TICK_EVENT = "timer_tick";
     const std::string FILE_LOADED_EVENT = "file_loaded";
+    const std::string CURRENT_FILE_REMOVED = "current_file_removed";
 }

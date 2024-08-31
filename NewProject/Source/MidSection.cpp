@@ -79,6 +79,11 @@ MidSection::MidSection(
     addAndMakeVisible(volumeSlider1);
     addAndMakeVisible(volumeSlider2);
     addAndMakeVisible(volumeSliderTransition);
+
+    fileLoadedCallback = std::bind(&MidSection::reevaluateSliders, this, std::placeholders::_1);
+	EventBus::getInstance().subscribe(EventTypes::FILE_LOADED_EVENT, fileLoadedCallback);
+
+    reevaluateSliders("");
 }
 
 MidSection::~MidSection()
@@ -242,19 +247,20 @@ void MidSection::resized()
 
 void MidSection::sliderValueChanged(juce::Slider* slider)
 {
-
-    if (slider == &volumeSlider1)
+    if (slider == &volumeSlider1 || slider == &volumeSlider2 || slider == &volumeSliderTransition)
     {
-        player1->setGain(slider->getValue());
-    }
-	else if (slider == &volumeSlider2)
-	{
-		player2->setGain(slider->getValue());
-	}
-	else if (slider == &volumeSliderTransition)
-	{
-		player1->setGain(slider->getValue());
-		player2->setGain(1 - slider->getValue());
+        // Get the values from the sliders
+        float volume1 = volumeSlider1.getValue();
+        float volume2 = volumeSlider2.getValue();
+        float transitionValue = volumeSliderTransition.getValue();
+
+        // Calculate the effective gain for each player
+        float gainPlayer1 = volume1 * (1.0f - transitionValue);
+        float gainPlayer2 = volume2 * transitionValue;
+
+        // Apply the calculated gain to the players
+        player1->setGain(gainPlayer1);
+        player2->setGain(gainPlayer2);
     }
     else if (slider == &hiKnob1.knobSlider)
     {
@@ -281,4 +287,17 @@ void MidSection::sliderValueChanged(juce::Slider* slider)
         player2->setLowGain(juce::Decibels::decibelsToGain(slider->getValue()));
     }
 
+}
+
+void MidSection::reevaluateSliders(const std::string& placeholder)
+{
+    sliderValueChanged(&volumeSlider1);
+    sliderValueChanged(&volumeSlider2);
+    sliderValueChanged(&volumeSliderTransition);
+    sliderValueChanged(&hiKnob1.knobSlider);
+    sliderValueChanged(&midKnob1.knobSlider);
+    sliderValueChanged(&lowKnob1.knobSlider);
+    sliderValueChanged(&hiKnob2.knobSlider);
+    sliderValueChanged(&midKnob2.knobSlider);
+    sliderValueChanged(&lowKnob2.knobSlider);
 }

@@ -16,4 +16,5 @@ namespace EventTypes
 {
     extern const std::string TIMER_TICK_EVENT;
     extern const std::string FILE_LOADED_EVENT;
+    extern const std::string CURRENT_FILE_REMOVED;
 }

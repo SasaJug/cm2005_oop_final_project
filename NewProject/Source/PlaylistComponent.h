@@ -17,9 +17,6 @@
 #include "EventTypes.h"
 using namespace juce;
 
-//==============================================================================
-/*
-*/
 class PlaylistComponent  : public juce::Component,
                            public TableListBoxModel,
                            public FileDragAndDropTarget,
@@ -78,6 +75,7 @@ private:
 
     juce::TextButton addButton{ "ADD" };
 
+    int previouslySelectedRow = -1;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlaylistComponent)
 };
