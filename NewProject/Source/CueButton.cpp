@@ -26,12 +26,10 @@ void CueButton::drawCentralContent(juce::Graphics& g, juce::Rectangle<float> bou
     auto center = bounds.getCentre();
     auto symbolSize = circleRadius * 0.3f;
 
-    g.setFont(juce::Font(circleRadius * 0.4f));  // Adjust the size of the text as needed
+    g.setFont(juce::Font(circleRadius * 0.4f));
 
-    // Set the color for the text
-    g.setColour(juce::Colours::orange);
+    g.setColour(isEnabled() ? juce::Colours::orange.brighter(0.5f) : juce::Colours::orange.darker(0.5f));
 
-    // Draw the text in the center
     juce::String buttonText = "CUE";
     g.drawText(buttonText, bounds, juce::Justification::centred, true);
 }

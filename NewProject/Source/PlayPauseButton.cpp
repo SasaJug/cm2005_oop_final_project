@@ -17,7 +17,7 @@ PlayPauseButton::PlayPauseButton()
 
 juce::Colour PlayPauseButton::getButtonColor() const
 {
-    return juce::Colours::green;
+    return isEnabled() ? juce::Colours::green.brighter(0.5f) : juce::Colours::green.darker(0.5f);
 }
 
 void PlayPauseButton::drawCentralContent(juce::Graphics& g, juce::Rectangle<float> bounds)

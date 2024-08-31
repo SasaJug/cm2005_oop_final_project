@@ -72,11 +72,16 @@ private:
 
     double position;
 
-    void setPositionRelative(const std::string& position);
-    void handleFileUnloaded(const std::string& position);
+    void setPositionRelative(const std::string& side);
+    void handleFileLoaded(const std::string& side);
+    void handleFileUnloaded(const std::string& side);
+    void reevaluateSliders(const std::string& side);
+    void enableButtons(const std::string& side);
+    void disableButtons(const std::string& side);
 
     std::function<void(const std::string&)> timerTickCallback;
     std::function<void(const std::string&)> fileRemovedCallback;
+    std::function<void(const std::string&)> fileLoadedCallback;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };

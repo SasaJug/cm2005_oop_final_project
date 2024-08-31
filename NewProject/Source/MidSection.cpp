@@ -163,16 +163,16 @@ void MidSection::paint (juce::Graphics& g)
         Constants::smallMargin + 183,
         1.0f);
 
-
-    // transition slider text
-    g.drawLine(0,5,0,getHeight()-5, 3.0f);
-    g.drawLine(getWidth(), 5, getWidth(), getHeight()-5, 3.0f);
-
+    // transition text and arrow
     g.setFont(10.0f);
     g.drawText("TRANSITION FX", 80, 317, 100, 12, juce::Justification::centredBottom);
+    g.drawLine(102, 337, 127, 343, 2.0f);
+    g.drawLine(127, 343, 152, 337, 2.0f);
 
-    g.drawLine(105, 337, 130, 343, 2.0f);
-    g.drawLine(130, 343, 155, 337, 2.0f);
+
+    // vertical lines
+    g.drawLine(0, 5, 0, getHeight() - 5, 3.0f);
+    g.drawLine(getWidth(), 5, getWidth(), getHeight() - 5, 3.0f);
 }
 
 void MidSection::resized()

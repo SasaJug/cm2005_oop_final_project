@@ -101,7 +101,6 @@ void WaveformDisplay::handleFileRemoved(const std::string& side)
 
 void WaveformDisplay::loadURLfromEvent(std::string payload)
 {
-    DBG("WaveformDisplay::loadURLfromEvent: " << payload);
     std::vector<std::string> tokens;
     std::stringstream ss(payload);
     std::string token;

@@ -19,10 +19,8 @@ public:
     RoundButtonBase(const juce::String& buttonName);
     virtual ~RoundButtonBase();
 
-    // Abstract method for subclasses to implement their own drawing
     virtual void drawCentralContent(juce::Graphics& g, juce::Rectangle<float> bounds) = 0;
 
-    // Abstract method for specifying the button color
     virtual juce::Colour getButtonColor() const = 0;
 
     void paintButton(juce::Graphics& g, bool isMouseOverButton, bool isButtonDown) override;
