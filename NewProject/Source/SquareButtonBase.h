@@ -7,20 +7,51 @@
 
   ==============================================================================
 */
+
 #pragma once
+
 #include <JuceHeader.h>
 
-class SquareButtonBase : public juce::Button
+using namespace juce;
+
+class SquareButtonBase : public Button
 {
 public:
-    SquareButtonBase(const juce::String& buttonName);
+    /**
+     * @brief Constructor to initialize the SquareButtonBase.
+     * @param buttonName The name of the button.
+     */
+    SquareButtonBase(const String& buttonName);
+
+    /**
+     * @brief Destructor for SquareButtonBase.
+     */
     ~SquareButtonBase() override;
 
-    void paintButton(juce::Graphics& g, bool isMouseOverButton, bool isButtonDown) override;
+    /**
+     * @brief Paints the button with custom styling.
+     * @param g The Graphics object used for drawing.
+     * @param isMouseOverButton Indicates if the mouse is over the button.
+     * @param isButtonDown Indicates if the button is currently pressed down.
+     */
+    void paintButton(Graphics& g, bool isMouseOverButton, bool isButtonDown) override;
+
+    /**
+     * @brief Handles resizing of the button.
+     */
     void resized() override;
 
 protected:
-    virtual juce::Colour getButtonColor() const = 0;  // Subclasses should define the button color
-    virtual void drawCentralContent(juce::Graphics& g, juce::Rectangle<float> bounds) = 0; // To be overridden by subclasses
-};
+    /**
+     * @brief Gets the color of the button.
+     * @return juce::Colour The color to be used for the button.
+     */
+    virtual Colour getButtonColor() const = 0;
 
+    /**
+     * @brief Draws the central content of the button.
+     * @param g The Graphics object used for drawing.
+     * @param bounds The rectangular area within which to draw the content.
+     */
+    virtual void drawCentralContent(Graphics& g, Rectangle<float> bounds) = 0;
+};

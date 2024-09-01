@@ -3,7 +3,7 @@
 
     PlaylistComponent.cpp
     Created: 4 Aug 2024 4:16:24pm
-    Author:  jugur
+    Author:  Sasa Jugurdzija, from initial version implemented in the course.
 
   ==============================================================================
 */
@@ -12,11 +12,9 @@
 #include "PlaylistComponent.h"
 
 //==============================================================================
-PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player, int _side) 
-    : player(_player),
-      side(_side)
+PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player, int _side)
+    : player(_player), side(_side)
 {
-
     addButton.addListener(this);
     addAndMakeVisible(tableComponent);
     addAndMakeVisible(addButton);
@@ -29,19 +27,18 @@ PlaylistComponent::~PlaylistComponent()
 {
 }
 
-void PlaylistComponent::paint (juce::Graphics& g)
+void PlaylistComponent::paint(juce::Graphics& g)
 {
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
 void PlaylistComponent::resized()
 {
-    tableComponent.getHeader().setColumnWidth(0, getWidth()*0.90);
-    tableComponent.getHeader().setColumnWidth(1, getWidth()*0.10);
+    tableComponent.getHeader().setColumnWidth(0, getWidth() * 0.90);
+    tableComponent.getHeader().setColumnWidth(1, getWidth() * 0.10);
     int buttonHeight = 30;
-    tableComponent.setBounds(0, 0, getWidth(), getHeight()-buttonHeight);
-    addButton.setBounds(0, getHeight() - buttonHeight, getWidth()/4, buttonHeight);
-
+    tableComponent.setBounds(0, 0, getWidth(), getHeight() - buttonHeight);
+    addButton.setBounds(0, getHeight() - buttonHeight, getWidth() / 4, buttonHeight);
 }
 
 int PlaylistComponent::getNumRows()
@@ -55,12 +52,12 @@ void PlaylistComponent::paintRowBackground(Graphics& g,
     int height,
     bool rowIsSelected)
 {
-    // just highlight selected rows
     if (rowIsSelected)
     {
         g.fillAll(Colours::orange);
     }
-    else {
+    else
+    {
         g.fillAll(Colours::darkgrey);
     }
 }
@@ -81,11 +78,11 @@ void PlaylistComponent::paintCell(Graphics& g,
 
 void PlaylistComponent::selectedRowsChanged(int lastRowSelected)
 {
-    // Check if the selected row is the same as the previous one
     if (lastRowSelected == previouslySelectedRow)
         return;
 
-    if (lastRowSelected >= 0) {
+    if (lastRowSelected >= 0)
+    {
         tableComponent.selectRow(lastRowSelected);
         URL url = URL{ trackTitles[lastRowSelected] };
         player->loadURL(url);
@@ -94,18 +91,16 @@ void PlaylistComponent::selectedRowsChanged(int lastRowSelected)
             std::to_string(side) + "," + url.toString(false).toStdString()); // payload: "side,url"
     }
 
-    // Update the previously selected row
     previouslySelectedRow = lastRowSelected;
 }
 
 void PlaylistComponent::cellClicked(int rowNumber, int columnId, const MouseEvent&)
 {
     DBG("Cell clicked: " + std::to_string(columnId));
-	tableComponent.selectRow(rowNumber);
+    tableComponent.selectRow(rowNumber);
 }
 
-Component* PlaylistComponent::refreshComponentForCell(
-    int rowNumber,
+Component* PlaylistComponent::refreshComponentForCell(int rowNumber,
     int columnId,
     bool isRowSelected,
     Component* existingComponentToUpdate)
@@ -114,7 +109,7 @@ Component* PlaylistComponent::refreshComponentForCell(
     {
         if (existingComponentToUpdate == nullptr)
         {
-            TextButton * btn = new TextButton { "x" };
+            TextButton* btn = new TextButton{ "x" };
             existingComponentToUpdate = btn;
             String id{ std::to_string(rowNumber) };
             btn->setComponentID(id);
@@ -150,21 +145,19 @@ void PlaylistComponent::buttonClicked(Button* button)
             tableComponent.deselectAllRows();
             EventBus::getInstance().triggerEvent(
                 EventTypes::CURRENT_FILE_REMOVED,
-                std::to_string(side)// payload: "side"
+                std::to_string(side) // payload: "side"
             );
         }
 
         trackTitles.erase(trackTitles.begin() + id);
 
-        // Adjust the selected row index if necessary
         if (currentlySelectedRow > id && currentlySelectedRow > 0)
         {
-            currentlySelectedRow--; // Move selection up by one row
+            currentlySelectedRow--;
         }
 
         tableComponent.updateContent();
 
-        // Re-select the correct row after deletion
         if (currentlySelectedRow >= 0 && currentlySelectedRow < trackTitles.size())
         {
             tableComponent.selectRow(currentlySelectedRow);
@@ -185,8 +178,3 @@ void PlaylistComponent::filesDropped(const StringArray& files, int x, int y)
         tableComponent.updateContent();
     }
 }
-
-
-
-
-

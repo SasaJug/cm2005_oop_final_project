@@ -3,7 +3,7 @@
 
     Knob.h
     Created: 24 Aug 2024 5:09:37pm
-    Author:  jugur
+    Author:  Sasa Jugurdzija
 
   ==============================================================================
 */
@@ -13,29 +13,57 @@
 #include <JuceHeader.h>
 #include "KnobLookAndFeel.h"
 #include "Constants.h"
+using namespace juce;
 
-class Knob : public juce::Component
+class Knob : public Component
 {
 public:
-    Knob(); // Constructor
-    ~Knob() override; // Destructor
+    /**
+     * @brief Constructor to initialize the Knob.
+     */
+    Knob();
 
-    void setRange(double minValue, double maxValue, double interval); // Sets the range of the knob
-    void setValue(double value); // Sets the current value of the knob
-    double getValue() const; // Gets the current value of the knob
+    /**
+     * @brief Destructor for Knob.
+     */
+    ~Knob() override;
 
-    void setKnobColor(const juce::Colour& color); // Set the knob color
-    void setLabel(const juce::String& labelText); // Set the label for the knob
+    /**
+     * @brief Sets the range of values for the knob.
+     * @param minValue The minimum value.
+     * @param maxValue The maximum value.
+     * @param interval The step interval between values.
+     */
+    void setRange(double minValue, double maxValue, double interval);
 
-    void resized() override; // Handle the resizing of the component
+    /**
+     * @brief Sets the current value of the knob.
+     * @param value The value to set.
+     */
+    void setValue(double value);
 
-    juce::Slider knobSlider; // The rotary knob
+    /**
+     * @brief Gets the current value of the knob.
+     * @return double The current value.
+     */
+    double getValue() const;
+
+    /**
+     * @brief Sets the label text for the knob.
+     * @param labelText The label text to display.
+     */
+    void setLabel(const String& labelText);
+
+    /**
+     * @brief Resizes the knob component.
+     */
+    void resized() override;
+
+    Slider knobSlider;
 
 private:
-    juce::Label knobLabel; // The label that appears below the knob
-
+    Label knobLabel;
     KnobLookAndFeel knobLookAndFeel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Knob)
 };
-

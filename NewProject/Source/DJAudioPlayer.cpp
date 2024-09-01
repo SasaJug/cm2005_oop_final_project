@@ -3,16 +3,21 @@
 
     DJAudioPlayer.cpp
     Created: 1 Aug 2024 7:39:19pm
-    Author:  jugur
+    Author:  The solution is mostly copied from the course videos and lesson worksheets.
 
   ==============================================================================
 */
 
 #include "DJAudioPlayer.h"
 
-DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager) : formatManager(_formatManager) {}
+DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager)
+    : formatManager(_formatManager)
+{
+}
 
-DJAudioPlayer::~DJAudioPlayer() {}
+DJAudioPlayer::~DJAudioPlayer()
+{
+}
 
 void DJAudioPlayer::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
 {
@@ -33,13 +38,14 @@ void DJAudioPlayer::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill
     equalizer.process(block);
 }
 
-void DJAudioPlayer::releaseResources() 
+void DJAudioPlayer::releaseResources()
 {
     transportSource.releaseResources();
     resampleSource.releaseResources();
 }
 
-void DJAudioPlayer::loadURL(URL audioURL) {
+void DJAudioPlayer::loadURL(URL audioURL)
+{
     auto* reader = formatManager.createReaderFor(audioURL.createInputStream(false));
 
     if (reader != nullptr)
@@ -65,16 +71,15 @@ double DJAudioPlayer::getGain()
     return transportSource.getGain();
 }
 
-void DJAudioPlayer::setGain(double gain) 
+void DJAudioPlayer::setGain(double gain)
 {
-    if(gain < 0.0 || gain > 1.0) return;
-	transportSource.setGain(gain);
+    if (gain < 0.0 || gain > 1.0) return;
+    transportSource.setGain(gain);
 }
-
 
 void DJAudioPlayer::setSpeed(double speed)
 {
-    if(speed < 0.0 || speed > 2.0) return;
+    if (speed < 0.0 || speed > 2.0) return;
     resampleSource.setResamplingRatio(speed);
 }
 
@@ -88,42 +93,43 @@ double DJAudioPlayer::getPositionRelative()
     return transportSource.getCurrentPosition() / transportSource.getLengthInSeconds();
 }
 
-
 void DJAudioPlayer::setPositionRelative(double pos)
 {
-    DBG("New position relative: " << pos);
-	if(pos < 0.0 || pos > 1.0) return;
+    if (pos < 0.0 || pos > 1.0) return;
     double posInSec = transportSource.getLengthInSeconds() * pos;
-	setPosition(posInSec);
+    setPosition(posInSec);
 }
 
 void DJAudioPlayer::setPositionChange(double change)
 {
-    DBG("Angle change: " << change);
     double newPos = getPositionRelative() + change;
-    if(newPos < 0.0 || newPos > 1.0) return;
+    if (newPos < 0.0 || newPos > 1.0) return;
     double posInSec = transportSource.getLengthInSeconds() * newPos;
-    DBG("New position: " << newPos);
-    DBG("New position in seconds: " << posInSec);
-	if(posInSec < 0.0 || posInSec > transportSource.getLengthInSeconds()) return;
-	setPosition(posInSec);
+    if (posInSec < 0.0 || posInSec > transportSource.getLengthInSeconds()) return;
+    setPosition(posInSec);
 }
 
-void DJAudioPlayer::start() 
+void DJAudioPlayer::start()
 {
     transportSource.start();
 }
 
-void DJAudioPlayer::stop() 
+void DJAudioPlayer::stop()
 {
-	transportSource.stop(); 
+    transportSource.stop();
 }
 
-void DJAudioPlayer::setLowGain(float gain) { 
-    DBG(gain);
-    equalizer.setLowGain(gain); 
+void DJAudioPlayer::setLowGain(float gain)
+{
+    equalizer.setLowGain(gain);
 }
 
-void DJAudioPlayer::setMidGain(float gain) { equalizer.setMidGain(gain); }
+void DJAudioPlayer::setMidGain(float gain)
+{
+    equalizer.setMidGain(gain);
+}
 
-void DJAudioPlayer::setHighGain(float gain) { equalizer.setHighGain(gain); }
+void DJAudioPlayer::setHighGain(float gain)
+{
+    equalizer.setHighGain(gain);
+}

@@ -3,7 +3,7 @@
 
     EventTypes.cpp
     Created: 25 Aug 2024 1:40:39pm
-    Author:  jugur
+    Author:  Sasa Jugurdzija
 
   ==============================================================================
 */

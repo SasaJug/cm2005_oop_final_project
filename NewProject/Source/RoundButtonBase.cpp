@@ -10,28 +10,28 @@
 
 #include "RoundButtonBase.h"
 
-RoundButtonBase::RoundButtonBase(const juce::String& buttonName)
-    : juce::Button(buttonName)
+RoundButtonBase::RoundButtonBase(const String& buttonName)
+    : Button(buttonName)
 {
     setClickingTogglesState(true);
 }
 
 RoundButtonBase::~RoundButtonBase() = default;
 
-void RoundButtonBase::paintButton(juce::Graphics& g, bool isMouseOverButton, bool isButtonDown)
+void RoundButtonBase::paintButton(Graphics& g, bool isMouseOverButton, bool isButtonDown)
 {
     auto bounds = getLocalBounds().toFloat();
-    auto circleRadius = juce::jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
+    auto circleRadius = jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
     auto center = bounds.getCentre();
 
     // Draw the background circle
-    g.setColour(juce::Colour::fromRGB(0x2c, 0x2c, 0x2c));
+    g.setColour(Colour::fromRGB(0x2c, 0x2c, 0x2c));
     g.fillEllipse(center.x - circleRadius, center.y - circleRadius,
         circleRadius * 2, circleRadius * 2);
 
     // Draw outer circle
     float outerRadius = circleRadius * 0.95f;
-    g.setColour(juce::Colours::lightgrey);
+    g.setColour(Colours::lightgrey);
     g.drawEllipse(center.x - outerRadius, center.y - outerRadius,
         outerRadius * 2, outerRadius * 2, 2.0f);
 
@@ -44,9 +44,7 @@ void RoundButtonBase::paintButton(juce::Graphics& g, bool isMouseOverButton, boo
     drawCentralContent(g, bounds);
 }
 
-
 void RoundButtonBase::resized()
 {
+
 }
-
-

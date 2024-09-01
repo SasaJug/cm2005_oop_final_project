@@ -3,7 +3,7 @@
 
     Constants.h
     Created: 24 Aug 2024 2:38:50pm
-    Author:  jugur
+    Author:  Sasa Jugurdzija
 
   ==============================================================================
 */
@@ -11,7 +11,6 @@
 #pragma once
 #include <JuceHeader.h>
 #include <juce_gui_basics/juce_gui_basics.h>
-
 
 namespace Constants
 {
@@ -22,7 +21,6 @@ namespace Constants
     extern const float smallMargin;
 
     extern const juce::Colour backgroundColor;
-    extern const float colorAlpha;
 
     extern const juce::Colour textColor;
 }

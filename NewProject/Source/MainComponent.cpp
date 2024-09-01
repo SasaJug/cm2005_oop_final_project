@@ -1,7 +1,5 @@
 #include "MainComponent.h"
 
-
-//==============================================================================
 MainComponent::MainComponent()
 {
 	// Make sure you set the size of the component after
@@ -67,24 +65,15 @@ void MainComponent::releaseResources()
 
 //==============================================================================
 void MainComponent::paint(juce::Graphics& g)
-{/*
-	juce::ColourGradient gradient(juce::Colour::fromRGB(0x7d, 0x7d, 0x7d), 0, 0,
-		juce::Colour::fromRGB(0x18, 0x18, 0x18), getWidth(), getHeight(),
-		false);
-
-	gradient.addColour(0.2, juce::Colour::fromRGB(0x32, 0x32, 0x32));
-	g.setGradientFill(gradient);
-	*/
+{
 	juce::ColourGradient baseGradient(Constants::backgroundColor.brighter(0.4f), getLocalBounds().getX(), getLocalBounds().getY(),
-		Constants::backgroundColor.darker(0.5f), getWidth(), getHeight(), false);
+		Constants::backgroundColor.darker(1.0f), getWidth(), getHeight(), false);
 	baseGradient.addColour(0.2, Constants::backgroundColor.brighter(0.1f));
 	g.setGradientFill(baseGradient);
 	g.fillRect(getLocalBounds());
 
-	// Define the text for the first line
 	juce::String textLine1 = "CM2005 OOP";
 
-	// Define the text for the second line
 	juce::String textLine2 = "OTODECKS";
 
 	int xPosition = 5;
@@ -99,10 +88,6 @@ void MainComponent::paint(juce::Graphics& g)
 
 void MainComponent::resized()
 {
-	// This is called when the MainContentComponent is resized.
-	// If you add any child components, this is where you should
-	// update their positions.
-
 	deck1.setBounds(0, 0, getWidth() * 0.36, 600);
 	playlistComponent1.setBounds(0, 416, getWidth() * 0.36, 156);
 

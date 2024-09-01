@@ -3,7 +3,7 @@
 
     MidSection.h
     Created: 11 Aug 2024 2:26:07pm
-    Author:  jugur
+    Author:  Sasa Jugurdzija
 
   ==============================================================================
 */
@@ -18,35 +18,50 @@
 #include "Constants.h"
 #include "EventBus.h"
 #include "EventTypes.h"
+
 using namespace juce;
 
-//==============================================================================
-/*
-*/
-class MidSection: public juce::Component,
-                  public juce::Slider::Listener
+class MidSection : public Component,
+    public Slider::Listener
 {
 public:
-    MidSection(
-        DJAudioPlayer* _player1,
-        DJAudioPlayer* _player2);
+    /**
+     * @brief Constructor to initialize the MidSection.
+     * @param _player1 Pointer to the first DJAudioPlayer.
+     * @param _player2 Pointer to the second DJAudioPlayer.
+     */
+    MidSection(DJAudioPlayer* _player1, DJAudioPlayer* _player2);
 
+    /**
+     * @brief Destructor for MidSection.
+     */
     ~MidSection() override;
 
-    void paint (juce::Graphics&) override;
+    /**
+     * @brief Paints the MidSection component.
+     * @param g The Graphics object used for drawing.
+     */
+    void paint(Graphics& g) override;
+
+    /**
+     * @brief Resizes the MidSection component.
+     *
+     */
     void resized() override;
 
-    void sliderValueChanged(juce::Slider* slider) override;
+    /**
+     * @brief Handles slider value changes.
+     * @param slider Pointer to the Slider that was adjusted.
+     */
+    void sliderValueChanged(Slider* slider) override;
 
 private:
-
-
     std::function<void(const std::string&)> fileLoadedCallback;
     void reevaluateSliders(const std::string& placeholder);
 
-    juce::Slider volumeSlider1;
-    juce::Slider volumeSlider2;
-    juce::Slider volumeSliderTransition;
+    Slider volumeSlider1;
+    Slider volumeSlider2;
+    Slider volumeSliderTransition;
     VolumeSliderLookAndFeel volumeSliderLookAndFeel;
 
     Knob hiKnob1;
@@ -60,5 +75,5 @@ private:
     DJAudioPlayer* player1;
     DJAudioPlayer* player2;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSection)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MidSection)
 };

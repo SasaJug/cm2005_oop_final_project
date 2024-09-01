@@ -3,7 +3,7 @@
 
     CueButton.cpp
     Created: 22 Aug 2024 8:48:45pm
-    Author:  jugur
+    Author:  Sasa Jugurdzija
 
   ==============================================================================
 */
@@ -17,14 +17,12 @@ CueButton::CueButton()
 
 juce::Colour CueButton::getButtonColor() const
 {
-    return juce::Colours::orange;
+    return isEnabled() ? juce::Colours::orange.brighter(0.5f) : juce::Colours::orange.darker(0.5f);
 }
 
 void CueButton::drawCentralContent(juce::Graphics& g, juce::Rectangle<float> bounds)
 {
     auto circleRadius = juce::jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
-    auto center = bounds.getCentre();
-    auto symbolSize = circleRadius * 0.3f;
 
     g.setFont(juce::Font(circleRadius * 0.4f));
 
@@ -33,4 +31,3 @@ void CueButton::drawCentralContent(juce::Graphics& g, juce::Rectangle<float> bou
     juce::String buttonText = "CUE";
     g.drawText(buttonText, bounds, juce::Justification::centred, true);
 }
-
